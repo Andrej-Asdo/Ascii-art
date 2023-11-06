@@ -1,0 +1,5 @@
+package Converter
+
+trait Converter {
+
+}
