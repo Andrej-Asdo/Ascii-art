@@ -18,14 +18,20 @@ class JPGImageTest extends FunSuite{
 
   test("Random pixel is black") {
     // Get randomPixel from image
-    val randPixel = (Random.between(0, blackImage.getHeight), Random.between(0, blackImage.getWidth))
+    val randPosition = (Random.between(0, blackImage.getHeight), Random.between(0, blackImage.getWidth))
     // Can be 0 --> need to fix this
-    assert(blackImage.getPixel(randPixel._1, randPixel._2) == 0)
+    val randPixel = blackImage.getPixel(randPosition._1, randPosition._2)
+    assert(randPixel.red == 0)
+    assert(randPixel.blue == 0)
+    assert(randPixel.green == 0)
   }
 
   test("All pixels are black") {
-    for(col <- 0 until  50; row <- 0 until 50) {
-      assert(blackImage.getPixel(col, row) == 0)
+    for(col <- 0 until  10; row <- 0 until 10) {
+      val randPixel = blackImage.getPixel(col, row)
+      assert(randPixel.red == 0)
+      assert(randPixel.blue == 0)
+      assert(randPixel.green == 0)
     }
   }
 

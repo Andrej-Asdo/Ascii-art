@@ -16,9 +16,10 @@ class GeneratedImageTest extends FunSuite{
 
   test("Image contains pixels") {
     // Get randomPixel from image
-    val randPixel = (Random.between(0, randomImage.getHeight), Random.between(0, randomImage.getWidth))
+    val randPosition = (Random.between(0, randomImage.getHeight), Random.between(0, randomImage.getWidth))
     // Can be 0 --> need to fix this
-    assert(randomImage.getPixel(randPixel._1, randPixel._2) != 0)
+    val randPixel = randomImage.getPixel(randPosition._1, randPosition._2)
+    assert(randPixel.red != 0)
   }
 
 }
