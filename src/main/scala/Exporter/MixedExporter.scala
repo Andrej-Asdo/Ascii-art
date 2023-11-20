@@ -1,5 +1,9 @@
 package Exporter
 
-class MixedExporter extends Exporter {
-  override def `export`(): Unit = ???
+import Image.AsciiImage
+
+class MixedExporter(exporters: Seq[Exporter]) extends Exporter {
+  override def `export`(asciiConvert: AsciiImage): Unit = {
+    exporters.foreach(exporter => `export`(asciiConvert))
+  }
 }

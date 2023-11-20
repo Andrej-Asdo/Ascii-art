@@ -1,5 +1,7 @@
 package Exporter
 
+import Image.AsciiImage
+
 trait Exporter {
-  def export(): Unit
+  def export(asciiConvert: AsciiImage): Unit
 }
