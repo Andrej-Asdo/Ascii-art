@@ -1,5 +1,6 @@
 package Image.Pixel
 
-class AsciiValue {
-
-}
+case class AsciiValue (
+                      val character: Char
+              )
+  extends Pixel

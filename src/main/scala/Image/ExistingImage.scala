@@ -1,5 +1,7 @@
 package Image
 
-trait ExistingImage extends Image{
+import Image.Pixel.Pixel
+
+trait ExistingImage[T <: Pixel] extends Image[T]{
 
 }

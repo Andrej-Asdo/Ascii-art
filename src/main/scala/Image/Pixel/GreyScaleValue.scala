@@ -1,3 +1,6 @@
 package Image.Pixel
 
-case class GreyScaleValue()
+case class GreyScaleValue(
+                         val greyScaleValue: Int
+                         )
+  extends Pixel
