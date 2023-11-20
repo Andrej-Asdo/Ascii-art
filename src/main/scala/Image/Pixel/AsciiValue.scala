@@ -1,5 +1,5 @@
 package Image.Pixel
 
-trait Pixel {
+class AsciiValue {
 
 }
