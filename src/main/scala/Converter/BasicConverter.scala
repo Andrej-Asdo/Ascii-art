@@ -3,6 +3,10 @@ import Converter.TransformationTable.TransformationTable
 import Image.{AsciiImage, GreyScaleImage, Image}
 import _root_.Image.Pixel.{GreyScaleValue, RGBValue, AsciiValue}
 
+/**
+ * A basic converter that uses a transformation table to transform images
+ * @param transformTable a transform table according to which the transformation is done
+ */
 class BasicConverter(transformTable: TransformationTable) extends Converter{
   override def convertToAscii(image: GreyScaleImage): AsciiImage = {
     val converted = new AsciiImage(image.getHeight,image.getWidth)
@@ -34,5 +38,10 @@ class BasicConverter(transformTable: TransformationTable) extends Converter{
     converted
   }
 
+  /**
+   * Converts a RGB pixel to a GreyScale pixel
+   * @param pixel a RGB pixel
+   * @return a GreyScale pixel
+   */
   private def greyscaleValue(pixel: RGBValue): GreyScaleValue = (GreyScaleValue(((0.3 * pixel.red) + (0.59 * pixel.green) + (0.11 * pixel.blue)).toInt))
 }
