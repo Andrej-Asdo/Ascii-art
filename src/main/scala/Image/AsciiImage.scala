@@ -7,9 +7,11 @@ class AsciiImage private (private val height: Int, private val width: Int, value
 
   def getPixel(row: Int, col: Int): AsciiValue = characters(row)(col)
   def setPixel(character: AsciiValue, row: Int, col: Int): AsciiImage =  {
-    val cpyValues = characters.clone()
-    cpyValues(row)(col) = character
-    new AsciiImage(height, width, cpyValues)
+//    val cpyValues = characters.clone()
+//    cpyValues(row)(col) = character
+//    new AsciiImage(height, width, cpyValues)
+    characters(row)(col) = character
+    this
   }
 
   def getWidth: Int = width

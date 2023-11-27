@@ -8,9 +8,11 @@ class GreyScaleImage private (private val height: Int, private val width: Int, v
   def getPixel(row: Int, col: Int): GreyScaleValue = greyScaleValues(row)(col)
 
   def setPixel(greyScaleValue: GreyScaleValue, row: Int, col: Int): GreyScaleImage = {
-    val cpyValues = greyScaleValues.clone()
-    cpyValues(row)(col) = greyScaleValue
-    new GreyScaleImage(height, width, cpyValues)
+//    val cpyValues = greyScaleValues.clone()
+//    cpyValues(row)(col) = greyScaleValue
+//    new GreyScaleImage(height, width, cpyValues)
+    greyScaleValues(row)(col) = greyScaleValue
+    this
   }
 
   def getWidth: Int = width
