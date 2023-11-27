@@ -14,12 +14,12 @@ class ScaleFilter(scale: Double) extends Filter {
 
   private def scaleToQuarter(greyScaleImage: GreyScaleImage): GreyScaleImage = {
     val rescaled = new GreyScaleImage(greyScaleImage.getHeight / 2, greyScaleImage.getWidth / 2)
-    for (row <- 0 until rescaled.getHeight by 2) {
-      for (col <- 0 until rescaled.getWidth by 2) {
+    for (row <- 0 until greyScaleImage.getHeight by 2) {
+      for (col <- 0 until greyScaleImage.getWidth by 2) {
         // Get ascii char from old Ascii
         val character = greyScaleImage.getPixel(row, col)
         // Set it
-        rescaled.setPixel(character, row, col)
+        rescaled.setPixel(character, row / 2 , col / 2)
       }
     }
     rescaled
