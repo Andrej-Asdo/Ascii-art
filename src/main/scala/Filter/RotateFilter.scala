@@ -3,7 +3,12 @@ package Filter
 import Image.Pixel.GreyScaleValue
 import Image.{AsciiImage, GreyScaleImage}
 
+/**
+ * Rotates the image by a multiple of 90 degrees
+ * @param degrees - the number of degrees it has to be turned
+ */
 class RotateFilter(degrees: Int) extends Filter {
+  // Normalize degrees
   private val normalizedDegrees = degrees % 360
   override def filterGreyScaleImage(greyScaleImage: GreyScaleImage): GreyScaleImage = {
     normalizedDegrees match {
@@ -14,9 +19,15 @@ class RotateFilter(degrees: Int) extends Filter {
       case 90 => rotate90(greyScaleImage)
       case 180 => rotate90(rotate90(greyScaleImage))
       case 270 => rotate90(rotate90(rotate90(greyScaleImage)))
+      case _ => throw new IllegalArgumentException("[Rotate Filter] The degrees are not a multiple of 90!")
     }
   }
 
+  /**
+   * Rotate image by 90 degrees clockwise
+   * @param greyScaleImage image to be rotated
+   * @return rotated image
+   */
   private def rotate90(greyScaleImage: GreyScaleImage): GreyScaleImage = {
     val rows = greyScaleImage.getHeight
     val cols = greyScaleImage.getWidth
@@ -30,6 +41,11 @@ class RotateFilter(degrees: Int) extends Filter {
     result
   }
 
+  /**
+   * Rotate image by 90 degrees counterclockwise
+   * @param greyScaleImage the image to be rotated
+   * @return rotated image
+   */
   private def rotateMinus90(greyScaleImage: GreyScaleImage): GreyScaleImage = {
     val rows = greyScaleImage.getHeight
     val cols = greyScaleImage.getWidth

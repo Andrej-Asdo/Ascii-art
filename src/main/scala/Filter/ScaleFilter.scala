@@ -2,16 +2,25 @@ package Filter
 
 import Image.{AsciiImage, GreyScaleImage}
 
+/**
+ * A Filter that scales the image 0.25, 1 or 4 times
+ * @param scale the scale
+ */
 class ScaleFilter(scale: Double) extends Filter {
   override def filterGreyScaleImage(greyScaleImage: GreyScaleImage): GreyScaleImage = {
     scale match {
       case 0.25 => scaleToQuarter(greyScaleImage)
       case 1 => greyScaleImage
       case 4 => scaleFourTimes(greyScaleImage)
-      case _ => greyScaleImage
+      case _ => throw new IllegalArgumentException("[Scale Filter] Invalid scale! Use 0.25, 1 or 4!")
     }
   }
 
+  /**
+   * Scale the image to 0.25 times
+   * @param greyScaleImage - the image to be scaled
+   * @return the scaled image
+   */
   private def scaleToQuarter(greyScaleImage: GreyScaleImage): GreyScaleImage = {
     val rescaled = new GreyScaleImage(greyScaleImage.getHeight / 2, greyScaleImage.getWidth / 2)
     for (row <- 0 until greyScaleImage.getHeight by 2) {
@@ -25,6 +34,11 @@ class ScaleFilter(scale: Double) extends Filter {
     rescaled
   }
 
+  /**
+   * Scale the image 4 times
+   * @param greyScaleImage - the image to be scaled
+   * @return the scaled image
+   */
   private def scaleFourTimes(greyScaleImage: GreyScaleImage): GreyScaleImage = {
     val rescaled = new GreyScaleImage(greyScaleImage.getHeight * 2, greyScaleImage.getWidth * 2)
     for (row <- 0 until greyScaleImage.getHeight) {
