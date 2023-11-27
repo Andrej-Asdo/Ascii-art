@@ -1,23 +1,33 @@
-package Loader.console.views
+package UI
 
 import Converter.{BasicConverter, Converter}
 import _root_.Converter.TransformationTable.LinearTable.{LinearTable, PaulBurkesTable}
 import Exporter.{ConsoleExporter, Exporter, FileExporter, MixedExporter}
 import Filter.{Filter, InvertFilter, MixedFilter, RotateFilter, ScaleFilter}
 import Image.{FileImage, GeneratedImage, Image}
+import UI.controllers.Controller
 import _root_.Image.Pixel.RGBValue
-import Loader.console.controllers.Controller
 
 import java.io.File
 
-class ConsoleView(controller: Controller) {
+/**
+ * A simple console UI that takes in arguments and converts the image
+ * @param controller - a controller that converts the image
+ */
+class ConsoleUI(controller: Controller) extends UI {
+  /**
+   * Gets filters from arguments
+   * @param filterNames - the names and arguments of all filters that will be used
+   * @return filter or filters that will be used
+   * @throws IllegalArgumentException - a filter is not recognized
+   */
   protected def getFilterFromNames(filterNames: Seq[String]): Filter = {
     var filters = List[Filter]()
     for(filter <- filterNames) {
       if (filter.contains("--invert"))
         filters = filters.appended(new InvertFilter())
 
-      if (filter.startsWith("--rotate")) {
+      else if (filter.startsWith("--rotate")) {
         // Make regex
         val rotateRegex = "--rotate ([+,-]*[0-9]+)".r
         filter match {
@@ -26,7 +36,7 @@ class ConsoleView(controller: Controller) {
         }
       }
 
-      if (filter.startsWith("--scale")) {
+      else if (filter.startsWith("--scale")) {
         // Make regex
         val scaleRegex = "--scale ([0-9]+[.]*[0-9]*)".r
         filter match {
@@ -35,10 +45,20 @@ class ConsoleView(controller: Controller) {
         }
       }
 
+      else {
+        throw new IllegalArgumentException("Invalid filter used or invalid parameters of a filter given!")
+      }
+
     }
     new MixedFilter(filters)
   }
 
+  /**
+   * Get all types of exporters that user wishes to use.
+   * @param exportArguments - a string representation of exporters
+   * @return all exporters that will be used
+   * @throws IllegalArgumentException - if export way is illegal
+   */
   protected def getExportFile(exportArguments: Seq[String]): Exporter = {
     var exporters = List[Exporter]()
     val exportRegex = "--output-file (.*)".r
@@ -49,42 +69,58 @@ class ConsoleView(controller: Controller) {
         case exportRegex(path) =>
           exporters = exporters.appended(new FileExporter(new File(path)))
 
-        //
+        // Only output to console
         case "--output-console" =>
           exporters = exporters.appended(ConsoleExporter)
+
+        case _ =>
+          throw new IllegalArgumentException("Invalid type of output! Use --output-console and/or --output-file path!")
       }
     }
     new MixedExporter(exporters)
   }
 
+  /**
+   * Gets image from the given arguments (either generated or path)
+   * @param image - an argument, that of wished image
+   * @return a chosen image type
+   * @throws IllegalArgumentException - if invalid argument or extension is provided
+   */
   protected def getImage(image: String): Image[RGBValue] = {
     val importRegex = "--image (.*(png|jpg|jpeg))".r
     image match {
+      // Random image will be used
       case "--image-random" =>
         new GeneratedImage()
+      // An existing image will be used
       case importRegex(path,_) =>
         new FileImage(new File(path))
-      case _ => throw new Exception("Invalid image argument or extension")
+      case _ => throw new IllegalArgumentException("Invalid image argument or extension! Use --image-random or --image path.(png|jpg|jpeg)!")
     }
   }
 
+  /**
+   * Gets the converter that user wishes to use for converting his/hers image
+   * @param tableCommand - an argument for usage of a given table or converter
+   * @return a converter to convert an image
+   */
   protected def getConverter(tableCommand: String): Converter = {
     val customTableRegex = "--custom-table (.*)".r
     tableCommand match {
-      case "--table PaulBurkes" =>
-        new BasicConverter(PaulBurkesTable)
+      // Use custom table
       case customTableRegex(table) =>
         new BasicConverter(new LinearTable(table))
+      // Use Paul Burkes tables or default to it
+      case "--table PaulBurkes" | _ =>
+        new BasicConverter(PaulBurkesTable)
     }
   }
 
-  protected def processArgument(argument: String): Unit = {
-    if(argument == "help") {
-      controller.showHelp()
-    }
-
-  }
-
+  /**
+   * Connect the commands with its arguments into one string
+   * @param args - the unparsed arguments
+   * @return - commands with its arguments
+   */
   protected def parseCommands(args: Seq[String]): Seq[String] = {
     var result = List[String]()
     var incompleteCommand = ""
@@ -108,7 +144,12 @@ class ConsoleView(controller: Controller) {
     result
   }
 
+  /**
+   * The main method that starts it all
+   * @param args the arguments from command line
+   */
   def run(args: Array[String]): Unit = {
+    println("---Running Conversion---")
     val regexExport = "--output-.*".r
     val regexImage = "--image.*".r
     val regexTable = "--(table|custom-table) .*".r
@@ -129,13 +170,20 @@ class ConsoleView(controller: Controller) {
           filters = filters.appended(command)
       }
     }
+    try {
+      if (tableType == "") {
+        controller.makeAscii(image = getImage(image), filter = getFilterFromNames(filters), output = getExportFile(exports))
+      }
+      else {
+        controller.makeAscii(image = getImage(image), converter = getConverter(tableType), filter = getFilterFromNames(filters), output = getExportFile(exports))
+      }
+      println("---Conversion Done---")
+    }
+    catch {
+      case e: IllegalArgumentException =>
+        println(e.getMessage)
+    }
 
-    if(tableType == "") {
-      controller.makeAscii(image = getImage(image), filter = getFilterFromNames(filters), output = getExportFile(exports))
-    }
-    else {
-      controller.makeAscii(image = getImage(image),converter = getConverter(tableType), filter = getFilterFromNames(filters), output = getExportFile(exports))
-    }
 
   }
 }

@@ -1,5 +1,0 @@
-package Loader
-
-class Loader {
-
-}

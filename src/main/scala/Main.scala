@@ -1,11 +1,11 @@
 package Main
 
-import Loader.console.controllers.ConsoleController
-import Loader.console.views.ConsoleView
+import UI.ConsoleUI
+import UI.controllers.ConsoleController
 
 object Main extends App {
-  println("Hello there")
+
   val controller = new ConsoleController
-  val view = new ConsoleView(controller)
-  view.run(args)
+  val consoleUI = new ConsoleUI(controller)
+  consoleUI.run(args)
 }

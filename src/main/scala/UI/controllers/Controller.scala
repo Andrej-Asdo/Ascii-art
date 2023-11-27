@@ -1,4 +1,4 @@
-package Loader.console.controllers
+package UI.controllers
 
 import Converter.{BasicConverter, Converter}
 import _root_.Converter.TransformationTable.LinearTable.PaulBurkesTable
