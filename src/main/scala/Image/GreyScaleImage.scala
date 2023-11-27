@@ -2,15 +2,24 @@ package Image
 
 import Image.Pixel.GreyScaleValue
 
-class GreyScaleImage private (private val height: Int, private val width: Int, values: Array[Array[GreyScaleValue]]) extends Image[GreyScaleValue]{
-  private val greyScaleValues = values
+/**
+ * A greyscale image
+ * @param height the height of an image
+ * @param width the width of an image
+ * @param values
+ */
+class GreyScaleImage (private val height: Int, private val width: Int) extends Image[GreyScaleValue]{
+  private val greyScaleValues = Array.ofDim[GreyScaleValue](height, width)
 
-  def getPixel(row: Int, col: Int): GreyScaleValue = greyScaleValues(row)(col)
+  def getPixel(row: Int, col: Int): GreyScaleValue = {
+    if(row > height || col > width)
+      throw new IndexOutOfBoundsException("Out of bounds! The height or width of the picture is smaller than requested!")
+    greyScaleValues(row)(col)
+  }
 
   def setPixel(greyScaleValue: GreyScaleValue, row: Int, col: Int): GreyScaleImage = {
-//    val cpyValues = greyScaleValues.clone()
-//    cpyValues(row)(col) = greyScaleValue
-//    new GreyScaleImage(height, width, cpyValues)
+    if (row > height || col > width)
+      throw new IndexOutOfBoundsException("Out of bounds! The height or width of the picture is smaller than requested!")
     greyScaleValues(row)(col) = greyScaleValue
     this
   }
@@ -18,8 +27,4 @@ class GreyScaleImage private (private val height: Int, private val width: Int, v
   def getWidth: Int = width
 
   def getHeight: Int = height
-
-  def this(height: Int, width: Int) = {
-    this(height, width, Array.ofDim[GreyScaleValue](height, width))
-  }
 }
