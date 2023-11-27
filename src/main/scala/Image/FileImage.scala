@@ -3,7 +3,7 @@ package Image
 import Image.Pixel.RGBValue
 
 import java.awt.image.BufferedImage
-import java.io.File
+import java.io.{File, IOException}
 import javax.imageio.ImageIO
 import scala.util.Using
 
@@ -13,7 +13,7 @@ import scala.util.Using
  * @param imageFile a file that contains the image
  */
 class FileImage(imageFile: File) extends ExistingImage[RGBValue] {
-  private val image: BufferedImage = ImageIO.read(imageFile)
+  private val image: BufferedImage = try { ImageIO.read(imageFile) } catch {case e: IOException => throw new IOException("[Input Image] Error loading the contents of image!")}
 
   override def getHeight: Int = image.getHeight
 
