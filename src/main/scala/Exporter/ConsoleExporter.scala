@@ -2,6 +2,9 @@ package Exporter
 
 import Image.AsciiImage
 
+/**
+ * An Exporter that exports to the console
+ */
 object ConsoleExporter extends Exporter {
   override def `export`(asciiConvert: AsciiImage): Unit = {
     for(row <- 0 until asciiConvert.getHeight) {
