@@ -5,7 +5,7 @@ import org.scalatest.FunSuite
 import java.io.File
 import scala.util.Random
 
-class JPGImageTest extends FunSuite{
+class FileImageTest extends FunSuite{
   def blackImage = new FileImage(new File("./images/jpg/black.jpg"))
 
   test("Height is non zero") {
