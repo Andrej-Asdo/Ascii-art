@@ -1,7 +1,7 @@
 package UI
 
 import Converter.{BasicConverter, Converter}
-import _root_.Converter.TransformationTable.LinearTable.{LinearTable, PaulBurkesTable}
+import _root_.Converter.TransformationTable.LinearTable.{LinearTable, PaulBurkesTable, SimpleBourkes}
 import Exporter.{ConsoleExporter, Exporter, FileExporter, MixedExporter}
 import Filter.{Filter, InvertFilter, MixedFilter, RotateFilter, ScaleFilter}
 import Image.{FileImage, GeneratedImage, Image}
@@ -27,7 +27,7 @@ class ConsoleUI(controller: Controller) extends UI {
       if (filter.contains("--invert"))
         filters = filters.appended(new InvertFilter())
 
-      else if (filter.startsWith("--rotate")) {
+      else if (filter.startsWith("--rotate ")) {
         // Make regex
         val rotateRegex = "--rotate ([+,-]*[0-9]+)".r
         filter match {
@@ -36,7 +36,7 @@ class ConsoleUI(controller: Controller) extends UI {
         }
       }
 
-      else if (filter.startsWith("--scale")) {
+      else if (filter.startsWith("--scale ")) {
         // Make regex
         val scaleRegex = "--scale ([0-9]+[.]*[0-9]*)".r
         filter match {
@@ -110,6 +110,9 @@ class ConsoleUI(controller: Controller) extends UI {
       // Use custom table
       case customTableRegex(table) =>
         new BasicConverter(new LinearTable(table))
+      // Use Simple Bourkes table
+      case "--table SimpleBourkes" =>
+        new BasicConverter(SimpleBourkes)
       // Use Paul Burkes tables or default to it
       case "--table PaulBurkes" | _ =>
         new BasicConverter(PaulBurkesTable)
@@ -164,7 +167,7 @@ class ConsoleUI(controller: Controller) extends UI {
           image = command
         case regexExport() =>
           exports = exports.appended(command)
-        case regexTable() =>
+        case regexTable(_) =>
           tableType = command
         case _ =>
           filters = filters.appended(command)
@@ -181,7 +184,8 @@ class ConsoleUI(controller: Controller) extends UI {
     }
     catch {
       case e: IllegalArgumentException =>
-        println(e.getMessage)
+        //println(e.getMessage)
+        System.err.println(e.getMessage)
     }
 
 
