@@ -52,4 +52,13 @@ class ScaleFilterTest extends FunSuite{
     }
   }
 
+  test("Filter: Scale Image With Invalid Scale No.1") {
+    val filter = new ScaleFilter(0.56)
+    assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
+  }
+
+  test("Filter: Scale Image With Invalid Scale No.2") {
+    val filter = new ScaleFilter(5)
+    assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
+  }
 }

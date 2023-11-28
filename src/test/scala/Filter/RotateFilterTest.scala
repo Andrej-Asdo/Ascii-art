@@ -231,4 +231,10 @@ class RotateFilterTest extends FunSuite{
       assert(rotated.getPixel(row, col) == rotatedBy90DiffDim.getPixel(row, col))
     }
   }
+
+  test("Filter: Rotate with invalid degrees") {
+    val filter = new RotateFilter(574)
+    assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
+    assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImageDiffDim))
+  }
 }
