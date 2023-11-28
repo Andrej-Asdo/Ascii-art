@@ -1,7 +1,7 @@
 package UI
 
 import Converter.{BasicConverter, Converter}
-import _root_.Converter.TransformationTable.LinearTable.{LinearTable, PaulBurkesTable, SimpleBourkes}
+import _root_.Converter.TransformationTable.LinearTable.{LinearTable, PaulBurkesTable, SimpleBurkes}
 import Exporter.{ConsoleExporter, Exporter, FileExporter, MixedExporter}
 import Filter.{Filter, InvertFilter, MixedFilter, RotateFilter, ScaleFilter}
 import Image.{FileImage, GeneratedImage, Image}
@@ -14,7 +14,7 @@ import java.io.File
  * A simple console UI that takes in arguments and converts the image
  * @param controller - a controller that converts the image
  */
-class ConsoleUI(controller: Controller) extends UI {
+class ConsoleUI(controller: Controller) extends UI(controller) {
   /**
    * Gets filters from arguments
    * @param filterNames - the names and arguments of all filters that will be used
@@ -111,8 +111,8 @@ class ConsoleUI(controller: Controller) extends UI {
       case customTableRegex(table) =>
         new BasicConverter(new LinearTable(table))
       // Use Simple Bourkes table
-      case "--table SimpleBourkes" =>
-        new BasicConverter(SimpleBourkes)
+      case "--table SimpleBurkes" =>
+        new BasicConverter(SimpleBurkes)
       // Use Paul Burkes tables or default to it
       case "--table PaulBurkes" | _ =>
         new BasicConverter(PaulBurkesTable)
@@ -163,6 +163,9 @@ class ConsoleUI(controller: Controller) extends UI {
     val parsedCommands = parseCommands(args)
     for(command <- parsedCommands) {
       command match {
+        case "--help" =>
+          print(controller.showHelp())
+          return
         case regexImage() =>
           image = command
         case regexExport() =>

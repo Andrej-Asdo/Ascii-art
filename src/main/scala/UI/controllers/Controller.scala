@@ -8,7 +8,7 @@ import Image.Image
 import _root_.Image.Pixel.RGBValue
 
 trait Controller {
-  def showHelp(): Unit
+  def showHelp(): String
 
   def makeAscii(image: Image[RGBValue], converter: Converter = new BasicConverter(PaulBurkesTable), filter: Filter, output: Exporter): Unit
 }
