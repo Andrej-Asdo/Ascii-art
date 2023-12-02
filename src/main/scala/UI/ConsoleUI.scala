@@ -152,7 +152,6 @@ class ConsoleUI(controller: Controller) extends UI(controller) {
    * @param args the arguments from command line
    */
   def run(args: Array[String]): Unit = {
-    println("---Running Conversion---")
     val regexExport = "--output-.*".r
     val regexImage = "--image.*".r
     val regexTable = "--(table|custom-table) .*".r
@@ -176,6 +175,7 @@ class ConsoleUI(controller: Controller) extends UI(controller) {
           filters = filters.appended(command)
       }
     }
+    println("---Running Conversion---")
     try {
       if (tableType == "") {
         controller.makeAscii(image = getImage(image), filter = getFilterFromNames(filters), output = getExportFile(exports))

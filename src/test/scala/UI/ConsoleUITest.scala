@@ -6,8 +6,8 @@ import Filter.{Filter, MixedFilter}
 import Image.{FileImage, GeneratedImage, Image}
 import _root_.Image.Pixel.RGBValue
 import UI.controllers.Controller
-import org.mockito.Mockito.verify
-import org.mockito.MockitoSugar.mock
+import org.mockito.Mockito.{never, verify, verifyNoInteractions, verifyNoMoreInteractions}
+import org.mockito.MockitoSugar.{mock, times, when}
 import org.mockito.captor.ArgCaptor
 import org.scalatest.FunSuite
 
@@ -162,5 +162,67 @@ class ConsoleUITest extends FunSuite {
     assert(converterCaptor.value.isInstanceOf[BasicConverter])
     assert(filterCaptor.value.isInstanceOf[MixedFilter])
     assert(exportCaptor.value.isInstanceOf[MixedExporter])
+  }
+
+  test("[ConsoleUI] Convert using Simple Burkes") {
+    val mockController = mock[Controller]
+    val consoleUI = new ConsoleUI(mockController)
+    val arguments = "--image-random --table SimpleBurkes --output-file ./images/ascii/converted.txt".split(" ")
+
+    val imageCaptor = ArgCaptor[Image[RGBValue]]
+    val converterCaptor = ArgCaptor[Converter]
+    val filterCaptor = ArgCaptor[Filter]
+    val exportCaptor = ArgCaptor[Exporter]
+
+    consoleUI.run(arguments)
+
+    verify(mockController).makeAscii(imageCaptor, converterCaptor, filterCaptor, exportCaptor)
+
+    assert(imageCaptor.value.isInstanceOf[GeneratedImage])
+    assert(converterCaptor.value.isInstanceOf[BasicConverter])
+    assert(filterCaptor.value.isInstanceOf[MixedFilter])
+    assert(exportCaptor.value.isInstanceOf[MixedExporter])
+  }
+
+  test("[ConsoleUI] Export to console") {
+    val mockController = mock[Controller]
+    val consoleUI = new ConsoleUI(mockController)
+    val arguments = "--image ./images/jpg/prague.jpg --output-console".split(" ")
+
+    // Redirect out stream
+    val out = new ByteArrayOutputStream()
+
+    // Run command
+    Console.withOut(out) {
+      consoleUI.run(arguments)
+    }
+    // Verify that it is not empty
+    assert(out.size() != 0)
+  }
+
+  test("[Console UI] Show help"){
+    val mockController = mock[Controller]
+    when(mockController.showHelp()).thenReturn("HELP")
+    val consoleUI = new ConsoleUI(mockController)
+    val arguments = "--help".split(" ")
+
+    val imageCaptor = ArgCaptor[Image[RGBValue]]
+    val converterCaptor = ArgCaptor[Converter]
+    val filterCaptor = ArgCaptor[Filter]
+    val exportCaptor = ArgCaptor[Exporter]
+
+    // Redirect out stream
+    val out = new ByteArrayOutputStream()
+
+    // Run command
+    Console.withOut(out) {
+      consoleUI.run(arguments)
+    }
+
+    verify(mockController,never()).makeAscii(imageCaptor,converterCaptor,filterCaptor,exportCaptor)
+    verify(mockController,times(1)).showHelp()
+
+    // Verify that it printed out correct help
+    assert(out.toString() == "HELP")
   }
 }

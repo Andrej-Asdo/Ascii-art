@@ -36,4 +36,10 @@ class FileImageTest extends FunSuite{
     }
   }
 
+  test("Get Pixel out of Bounds") {
+    assertThrows[IndexOutOfBoundsException](blackImage.getPixel(1500, 2000))
+    assertThrows[IndexOutOfBoundsException](blackImage.getPixel(1500, 20))
+    assertThrows[IndexOutOfBoundsException](blackImage.getPixel(15, 2000))
+  }
+
 }
