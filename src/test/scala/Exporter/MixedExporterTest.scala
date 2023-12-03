@@ -1,0 +1,5 @@
+package Exporter
+
+class MixedExporterTest {
+
+}
