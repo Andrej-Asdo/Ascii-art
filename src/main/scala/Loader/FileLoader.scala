@@ -1,12 +1,19 @@
 package Loader
-import Image.{AsciiImage, FileImage, Image, RGBImage}
+import Image.{FileImage, RGBImage}
 
 import java.awt.image.BufferedImage
 import java.io.{File, IOException}
 import javax.imageio.ImageIO
 
+/**
+ * Loader of images from file
+ * @param path - a path where the file is located
+ */
 class FileLoader(path: String) extends Loader {
+  // Regex of supported formats
   private val importRegex = "(.*(png|jpg|jpeg))".r
+
+  // Check for a supported format
   if (path match {
     case importRegex(_,_) => true
     case _ => false

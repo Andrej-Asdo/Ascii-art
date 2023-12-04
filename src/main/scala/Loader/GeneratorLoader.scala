@@ -4,6 +4,9 @@ import _root_.Image.Pixel.RGBValue
 
 import scala.util.Random
 
+/**
+ * A loader of a random image. Creates random image every time a loadImage method is called.
+ */
 object GeneratorLoader extends Loader {
   private val random = new Random
   override def loadImage(): RGBImage = {
