@@ -6,7 +6,7 @@ import org.scalatest.FunSuite
 import scala.util.Random
 
 class GeneratedImageTest extends FunSuite{
-    def randomImage = GeneratorLoader.loadImage()
+  def randomImage: RGBImage = GeneratorLoader.loadImage()
 
   test("Height is non zero") {
     assert(randomImage.getHeight != 0)
@@ -15,14 +15,4 @@ class GeneratedImageTest extends FunSuite{
   test("Width is non zero") {
     assert(randomImage.getWidth != 0)
   }
-
-  test("Image contains pixels") {
-    // Get randomPixel from image
-    val rand = new Random
-    val randPosition = (rand.between(0, randomImage.getHeight), rand.between(0, randomImage.getWidth))
-    // Can be 0 --> need to fix this
-    val randPixel = randomImage.getPixel(randPosition._1, randPosition._2)
-    assert(randPixel.red != 0)
-  }
-
 }

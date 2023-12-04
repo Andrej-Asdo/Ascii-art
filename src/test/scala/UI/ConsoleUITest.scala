@@ -184,6 +184,26 @@ class ConsoleUITest extends FunSuite {
     assert(exportCaptor.value.isInstanceOf[MixedExporter])
   }
 
+  test("[ConsoleUI] Convert using Non Linear Table") {
+    val mockController = mock[Controller]
+    val consoleUI = new ConsoleUI(mockController)
+    val arguments = "--image-random --table Nonlinear --output-file ./images/ascii/converted.txt".split(" ")
+
+    val imageCaptor = ArgCaptor[Image[RGBValue]]
+    val converterCaptor = ArgCaptor[Converter]
+    val filterCaptor = ArgCaptor[Filter]
+    val exportCaptor = ArgCaptor[Exporter]
+
+    consoleUI.run(arguments)
+
+    verify(mockController).makeAscii(imageCaptor, converterCaptor, filterCaptor, exportCaptor)
+
+    assert(imageCaptor.value.isInstanceOf[GeneratedImage])
+    assert(converterCaptor.value.isInstanceOf[BasicConverter])
+    assert(filterCaptor.value.isInstanceOf[MixedFilter])
+    assert(exportCaptor.value.isInstanceOf[MixedExporter])
+  }
+
   test("[ConsoleUI] Export to console") {
     val mockController = mock[Controller]
     val consoleUI = new ConsoleUI(mockController)

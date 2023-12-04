@@ -1,6 +1,7 @@
 package UI
 
 import Converter.{BasicConverter, Converter}
+import _root_.Converter.TransformationTable.NonLinearTable.NonLinearTable
 import _root_.Converter.TransformationTable.LinearTable.{LinearTable, PaulBurkesTable, SimpleBurkes}
 import Exporter.{ConsoleExporter, Exporter, FileExporter, MixedExporter}
 import Filter.{Filter, InvertFilter, MixedFilter, RotateFilter, ScaleFilter}
@@ -114,6 +115,9 @@ class ConsoleUI(controller: Controller) extends UI(controller) {
       // Use Simple Bourkes table
       case "--table SimpleBurkes" =>
         new BasicConverter(SimpleBurkes)
+      // Use non-linear table
+      case "--table Nonlinear" =>
+        new BasicConverter(NonLinearTable)
       // Use Paul Burkes tables or default to it
       case "--table PaulBurkes" | _ =>
         new BasicConverter(PaulBurkesTable)

@@ -1,14 +1,12 @@
 package Converter
 
 import Converter.TransformationTable.LinearTable.PaulBurkesTable
-import Image.FileImage
+import Loader.FileLoader
 import org.scalatest.FunSuite
-
-import java.io.File
 
 class BasicConverterTest extends FunSuite{
   val basicConverter = new BasicConverter(PaulBurkesTable)
-  val blackImage = new FileImage(new File("./images/jpg/black.jpg"))
+  val blackImage = new FileLoader("./images/jpg/black.jpg").loadImage()
 
   test("Convert Black Image") {
     val greyScale = basicConverter.convertToGreyScale(blackImage)
