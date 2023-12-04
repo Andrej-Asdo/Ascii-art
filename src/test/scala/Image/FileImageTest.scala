@@ -1,5 +1,6 @@
 package Image
 
+import Loader.FileLoader
 import org.mockito.MockitoSugar.{mock, when}
 import org.scalatest.FunSuite
 
@@ -7,7 +8,7 @@ import java.io.{File, IOException}
 import scala.util.Random
 
 class FileImageTest extends FunSuite{
-  def blackImage = new FileImage(new File("./images/jpg/black.jpg"))
+  def blackImage = new FileLoader("./images/jpg/black.jpg").loadImage()
 
   test("Height is non zero") {
     assert(blackImage.getHeight != 0)
@@ -41,12 +42,6 @@ class FileImageTest extends FunSuite{
     assertThrows[IndexOutOfBoundsException](blackImage.getPixel(1500, 2000))
     assertThrows[IndexOutOfBoundsException](blackImage.getPixel(1500, 20))
     assertThrows[IndexOutOfBoundsException](blackImage.getPixel(15, 2000))
-  }
-
-  test("Load Image from Corrupted File") {
-    val mockFile = mock[File]
-    when(mockFile.canRead).thenReturn(false)
-    assertThrows[IOException](new FileImage(mockFile))
   }
 
 }

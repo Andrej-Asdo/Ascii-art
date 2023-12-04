@@ -7,6 +7,7 @@ import Filter.{Filter, InvertFilter, MixedFilter, RotateFilter, ScaleFilter}
 import Image.{FileImage, GeneratedImage, Image}
 import UI.controllers.Controller
 import _root_.Image.Pixel.RGBValue
+import Loader.{FileLoader, GeneratorLoader}
 
 import java.io.File
 
@@ -91,10 +92,10 @@ class ConsoleUI(controller: Controller) extends UI(controller) {
     image match {
       // Random image will be used
       case "--image-random" =>
-        new GeneratedImage()
+        GeneratorLoader.loadImage()
       // An existing image will be used
       case importRegex(path,_) =>
-        new FileImage(new File(path))
+        new FileLoader(path).loadImage()
       case _ => throw new IllegalArgumentException("Invalid image argument or extension! Use --image-random or --image path.(png|jpg|jpeg)!")
     }
   }

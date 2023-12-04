@@ -1,10 +1,12 @@
 package Image
 
+import Loader.GeneratorLoader
 import org.scalatest.FunSuite
+
 import scala.util.Random
 
 class GeneratedImageTest extends FunSuite{
-    def randomImage = new GeneratedImage()
+    def randomImage = GeneratorLoader.loadImage()
 
   test("Height is non zero") {
     assert(randomImage.getHeight != 0)
