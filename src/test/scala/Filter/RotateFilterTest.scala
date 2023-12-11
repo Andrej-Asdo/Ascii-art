@@ -2,6 +2,8 @@ package Filter
 
 import Image.GreyScaleImage
 import Image.Pixel.GreyScaleValue
+import org.mockito.ArgumentMatchersSugar.any
+import org.mockito.MockitoSugar.{mock, times, verify, when}
 import org.scalatest.FunSuite
 
 class RotateFilterTest extends FunSuite{
@@ -236,5 +238,47 @@ class RotateFilterTest extends FunSuite{
     val filter = new RotateFilter(574)
     assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
     assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImageDiffDim))
+  }
+
+  test("Filter: Rotate a Zero Dimensional Image") {
+    // Mock the Image
+    val image = mock[GreyScaleImage]
+    when(image.getHeight).thenReturn(0)
+    when(image.getWidth).thenReturn(0)
+
+    val filter = new RotateFilter(90)
+    val rotatedImage = filter.filterGreyScaleImage(image)
+    assert(rotatedImage.getHeight == 0)
+    assert(rotatedImage.getWidth == 0)
+    // Verify No Access to the Mock Image Get
+    verify(image, times(0)).getPixel(any[Int], any[Int])
+  }
+
+  test("Filter: Rotate a 2x0 Dimensional Image") {
+    // Mock the Image
+    val image = mock[GreyScaleImage]
+    when(image.getHeight).thenReturn(2)
+    when(image.getWidth).thenReturn(0)
+
+    val filter = new RotateFilter(90)
+    val rotatedImage = filter.filterGreyScaleImage(image)
+    assert(rotatedImage.getHeight == 0)
+    assert(rotatedImage.getWidth == 2)
+    // Verify No Access to the Mock Image Get
+    verify(image, times(0)).getPixel(any[Int], any[Int])
+  }
+
+  test("Filter: Rotate a 0x2 Dimensional Image") {
+    // Mock the Image
+    val image = mock[GreyScaleImage]
+    when(image.getHeight).thenReturn(0)
+    when(image.getWidth).thenReturn(2)
+
+    val filter = new RotateFilter(90)
+    val rotatedImage = filter.filterGreyScaleImage(image)
+    assert(rotatedImage.getHeight == 2)
+    assert(rotatedImage.getWidth == 0)
+    // Verify No Access to the Mock Image Get
+    verify(image, times(0)).getPixel(any[Int], any[Int])
   }
 }

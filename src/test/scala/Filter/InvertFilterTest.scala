@@ -2,6 +2,8 @@ package Filter
 
 import Image.GreyScaleImage
 import Image.Pixel.GreyScaleValue
+import org.mockito.ArgumentMatchersSugar.any
+import org.mockito.MockitoSugar.{mock, times, verify, when}
 import org.scalatest.FunSuite
 
 class InvertFilterTest extends FunSuite{
@@ -50,6 +52,34 @@ class InvertFilterTest extends FunSuite{
     val invertedImage = filter.filterGreyScaleImage(zeroDimImage)
     assert(invertedImage.getHeight == 0)
     assert(invertedImage.getWidth == 0)
+  }
+
+  test("Filter: Invert a 2x0 Dimensional Image") {
+    // Mock the Image
+    val image = mock[GreyScaleImage]
+    when(image.getHeight).thenReturn(2)
+    when(image.getWidth).thenReturn(0)
+
+    val filter = new InvertFilter()
+    val invertedImage = filter.filterGreyScaleImage(image)
+    assert(invertedImage.getHeight == 2)
+    assert(invertedImage.getWidth == 0)
+    // Verify No Access to the Mock Image Get
+    verify(image, times(0)).getPixel(any[Int], any[Int])
+  }
+
+  test("Filter: Invert a 0x2 Dimensional Image") {
+    // Mock the Image
+    val image = mock[GreyScaleImage]
+    when(image.getHeight).thenReturn(0)
+    when(image.getWidth).thenReturn(2)
+
+    val filter = new InvertFilter()
+    val invertedImage = filter.filterGreyScaleImage(image)
+    assert(invertedImage.getHeight == 0)
+    assert(invertedImage.getWidth == 2)
+    // Verify No Access to the Mock Image Get
+    verify(image, times(0)).getPixel(any[Int], any[Int])
   }
 
   test("Filter: Invert a 2x3 Image") {

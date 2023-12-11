@@ -2,6 +2,8 @@ package Filter
 
 import Image.GreyScaleImage
 import Image.Pixel.GreyScaleValue
+import org.mockito.ArgumentMatchersSugar.any
+import org.mockito.MockitoSugar.{mock, times, verify, verifyZeroInteractions, when}
 import org.scalatest.FunSuite
 
 class ScaleFilterTest extends FunSuite{
@@ -52,13 +54,55 @@ class ScaleFilterTest extends FunSuite{
     }
   }
 
-  test("Filter: Scale Image With Invalid Scale No.1") {
+  test("Filter: Scale Image With Invalid Scale Double") {
     val filter = new ScaleFilter(0.56)
     assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
   }
 
-  test("Filter: Scale Image With Invalid Scale No.2") {
+  test("Filter: Scale Image With Invalid Scale Int") {
     val filter = new ScaleFilter(5)
     assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
+  }
+
+  test("Filter: Scale a Zero Dimensional Image") {
+    // Mock the Image
+    val image = mock[GreyScaleImage]
+    when(image.getHeight).thenReturn(0)
+    when(image.getWidth).thenReturn(0)
+
+    val filter = new ScaleFilter(4)
+    val scaledImage = filter.filterGreyScaleImage(image)
+    assert(scaledImage.getHeight == 0)
+    assert(scaledImage.getWidth == 0)
+    // Verify No Access to the Mock Image Get
+    verify(image, times(0)).getPixel(any[Int], any[Int])
+  }
+
+  test("Filter: Rotate a 2x0 Dimensional Image") {
+    // Mock the Image
+    val image = mock[GreyScaleImage]
+    when(image.getHeight).thenReturn(2)
+    when(image.getWidth).thenReturn(0)
+
+    val filter = new ScaleFilter(4)
+    val scaledImage = filter.filterGreyScaleImage(image)
+    assert(scaledImage.getHeight == 4)
+    assert(scaledImage.getWidth == 0)
+    // Verify No Access to the Mock Image Get
+    verify(image, times(0)).getPixel(any[Int], any[Int])
+  }
+
+  test("Filter: Rotate a 0x2 Dimensional Image") {
+    // Mock the Image
+    val image = mock[GreyScaleImage]
+    when(image.getHeight).thenReturn(0)
+    when(image.getWidth).thenReturn(2)
+
+    val filter = new ScaleFilter(4)
+    val scaledImage = filter.filterGreyScaleImage(image)
+    assert(scaledImage.getHeight == 0)
+    assert(scaledImage.getWidth == 4)
+    // Verify No Access to the Mock Image Get
+    verify(image, times(0)).getPixel(any[Int],any[Int])
   }
 }

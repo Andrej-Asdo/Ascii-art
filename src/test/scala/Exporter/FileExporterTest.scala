@@ -10,13 +10,17 @@ import scala.io.Source
 
 class FileExporterTest extends FunSuite {
   test("[File Exporter] Export Ascii Image to File") {
-    val ascii2x3Image: AsciiImage = new AsciiImage(2, 3)
-      .setPixel(AsciiValue('t'), 0, 0)
-      .setPixel(AsciiValue('e'), 0, 1)
-      .setPixel(AsciiValue('s'), 0, 2)
-      .setPixel(AsciiValue('t'), 1, 0)
-      .setPixel(AsciiValue('e'), 1, 1)
-      .setPixel(AsciiValue('d'), 1, 2)
+    // Mock the Export Image
+    val ascii2x3Image: AsciiImage = mock[AsciiImage]
+    when(ascii2x3Image.getHeight).thenReturn(2)
+    when(ascii2x3Image.getWidth).thenReturn(3)
+    when(ascii2x3Image.getPixel(0, 0)).thenReturn(AsciiValue('t'))
+    when(ascii2x3Image.getPixel(0, 1)).thenReturn(AsciiValue('e'))
+    when(ascii2x3Image.getPixel(0, 2)).thenReturn(AsciiValue('s'))
+    when(ascii2x3Image.getPixel(1, 0)).thenReturn(AsciiValue('t'))
+    when(ascii2x3Image.getPixel(1, 1)).thenReturn(AsciiValue('e'))
+    when(ascii2x3Image.getPixel(1, 2)).thenReturn(AsciiValue('d'))
+
     val exportedImage = "tested"
 
     val exporter = new FileExporter(new File("./images/ascii/converted.txt"))
