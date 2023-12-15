@@ -7,8 +7,7 @@ import scala.util.Random
 /**
  * A loader of a random image. Creates random image every time a loadImage method is called.
  */
-object GeneratorLoader extends Loader {
-  private val random = new Random
+class GeneratorLoader(private val random: Random) extends Loader {
   override def loadImage(): RGBImage = {
 
     // Random height

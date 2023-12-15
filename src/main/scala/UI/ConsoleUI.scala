@@ -11,6 +11,7 @@ import _root_.Image.Pixel.RGBValue
 import Loader.{FileLoader, GeneratorLoader}
 
 import java.io.File
+import scala.util.Random
 
 /**
  * A simple console UI that takes in arguments and converts the image
@@ -93,7 +94,7 @@ class ConsoleUI(controller: Controller) extends UI(controller) {
     image match {
       // Random image will be used
       case "--image-random" =>
-        GeneratorLoader.loadImage()
+        new GeneratorLoader(new Random).loadImage()
       // An existing image will be used
       case importRegex(path,_) =>
         new FileLoader(path).loadImage()

@@ -6,7 +6,6 @@ import Image.Pixel.GreyScaleValue
  * A greyscale image
  * @param height the height of an image
  * @param width the width of an image
- * @param values
  */
 class GreyScaleImage (private val height: Int, private val width: Int) extends Image[GreyScaleValue]{
   private val greyScaleValues = Array.ofDim[GreyScaleValue](height, width)
