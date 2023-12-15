@@ -58,7 +58,7 @@ class BasicControllerTest extends FunSuite{
 
     //verify(mockConverter,times(1)).convertToGreyScale(mockImage)
     verify(mockConverter,times(1)).convert(greyScaleCaptor)
-    verify(mockFilter,times(1)).filterGreyScaleImage(greyScaleCaptor)
+    verify(mockFilter,times(1)).filterImage(greyScaleCaptor)
     verify(mockOutput,times(1)).`export`(asciiCaptor)
   }
 }

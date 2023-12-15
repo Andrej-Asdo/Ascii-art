@@ -4,7 +4,7 @@ import Converter.{AsciiConverter, Converter}
 import _root_.Converter.TransformationTable.NonLinearTable.NonLinearTable
 import _root_.Converter.TransformationTable.LinearTable.{LinearTable, PaulBurkesTable, SimpleBurkes}
 import Exporter.{ConsoleExporter, Exporter, FileExporter, MixedExporter}
-import Filter.{Filter, InvertFilter, MixedFilter, RotateFilter, ScaleFilter}
+import Filter.{GreyScaleFilter, InvertFilter, MixedFilter, RotateFilter, ScaleFilter}
 import Image.{FileImage, GeneratedImage, Image, RGBImage}
 import UI.controllers.Controller
 import _root_.Image.Pixel.RGBValue
@@ -24,8 +24,8 @@ class ConsoleUI(controller: Controller) extends UI(controller) {
    * @return filter or filters that will be used
    * @throws IllegalArgumentException - a filter is not recognized
    */
-  protected def getFilterFromNames(filterNames: Seq[String]): Filter = {
-    var filters = List[Filter]()
+  protected def getFilterFromNames(filterNames: Seq[String]): GreyScaleFilter = {
+    var filters = List[GreyScaleFilter]()
     for(filter <- filterNames) {
       if (filter.contains("--invert"))
         filters = filters.appended(new InvertFilter())

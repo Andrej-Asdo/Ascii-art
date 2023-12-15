@@ -2,7 +2,7 @@ package UI.controllers
 
 import Converter.{AsciiConverter, Converter, GreyScaleConverter}
 import Exporter.Exporter
-import Filter.Filter
+import Filter.GreyScaleFilter
 import Image.{Image, RGBImage}
 import _root_.Image.Pixel.RGBValue
 
@@ -34,10 +34,10 @@ class BasicController extends Controller {
       "--custom-table {chars} chars that will be used to convert the image ranging from black to white (left to right)\n"
   }
 
-  override def makeAscii(image: RGBImage, converter: AsciiConverter, filter: Filter, output: Exporter): Unit = {
+  override def makeAscii(image: RGBImage, converter: AsciiConverter, filter: GreyScaleFilter, output: Exporter): Unit = {
     val greyScaleConverter = new GreyScaleConverter()
     val greyScaleImage = greyScaleConverter.convert(image)
-    val filteredImage = filter.filterGreyScaleImage(greyScaleImage)
+    val filteredImage = filter.filterImage(greyScaleImage)
     val asciiImage = converter.convert(filteredImage)
     output.`export`(asciiImage)
   }

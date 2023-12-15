@@ -6,8 +6,8 @@ import Image.{AsciiImage, GreyScaleImage}
  * A Filter that scales the image 0.25, 1 or 4 times
  * @param scale the scale
  */
-class ScaleFilter(scale: Double) extends Filter {
-  override def filterGreyScaleImage(greyScaleImage: GreyScaleImage): GreyScaleImage = {
+class ScaleFilter(scale: Double) extends GreyScaleFilter {
+  override def filterImage(greyScaleImage: GreyScaleImage): GreyScaleImage = {
     scale match {
       case 0.25 => scaleToQuarter(greyScaleImage)
       case 1 => greyScaleImage

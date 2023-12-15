@@ -2,7 +2,7 @@ package UI
 
 import Converter.{AsciiConverter, Converter}
 import Exporter.{Exporter, MixedExporter}
-import Filter.{Filter, MixedFilter}
+import Filter.{GreyScaleFilter, MixedFilter}
 import Image.{FileImage, GeneratedImage, Image, RGBImage}
 import _root_.Image.Pixel.RGBValue
 import UI.controllers.Controller
@@ -23,7 +23,7 @@ class ConsoleUITest extends FunSuite {
 
     val imageCaptor = ArgCaptor[RGBImage]
     val converterCaptor = ArgCaptor[AsciiConverter]
-    val filterCaptor = ArgCaptor[Filter]
+    val filterCaptor = ArgCaptor[GreyScaleFilter]
     val exportCaptor = ArgCaptor[Exporter]
 
     consoleUI.run(arguments)
@@ -42,7 +42,7 @@ class ConsoleUITest extends FunSuite {
 
     val imageCaptor = ArgCaptor[RGBImage]
     val converterCaptor = ArgCaptor[AsciiConverter]
-    val filterCaptor = ArgCaptor[Filter]
+    val filterCaptor = ArgCaptor[GreyScaleFilter]
     val exportCaptor = ArgCaptor[Exporter]
 
     consoleUI.run(arguments)
@@ -61,7 +61,7 @@ class ConsoleUITest extends FunSuite {
 
     val imageCaptor = ArgCaptor[RGBImage]
     val converterCaptor = ArgCaptor[AsciiConverter]
-    val filterCaptor = ArgCaptor[Filter]
+    val filterCaptor = ArgCaptor[GreyScaleFilter]
     val exportCaptor = ArgCaptor[Exporter]
 
     consoleUI.run(arguments)
@@ -131,7 +131,7 @@ class ConsoleUITest extends FunSuite {
 
     val imageCaptor = ArgCaptor[RGBImage]
     val converterCaptor = ArgCaptor[AsciiConverter]
-    val filterCaptor = ArgCaptor[Filter]
+    val filterCaptor = ArgCaptor[GreyScaleFilter]
     val exportCaptor = ArgCaptor[Exporter]
 
     consoleUI.run(arguments)
@@ -151,7 +151,7 @@ class ConsoleUITest extends FunSuite {
 
     val imageCaptor = ArgCaptor[RGBImage]
     val converterCaptor = ArgCaptor[AsciiConverter]
-    val filterCaptor = ArgCaptor[Filter]
+    val filterCaptor = ArgCaptor[GreyScaleFilter]
     val exportCaptor = ArgCaptor[Exporter]
 
     consoleUI.run(arguments)
@@ -171,7 +171,7 @@ class ConsoleUITest extends FunSuite {
 
     val imageCaptor = ArgCaptor[RGBImage]
     val converterCaptor = ArgCaptor[AsciiConverter]
-    val filterCaptor = ArgCaptor[Filter]
+    val filterCaptor = ArgCaptor[GreyScaleFilter]
     val exportCaptor = ArgCaptor[Exporter]
 
     consoleUI.run(arguments)
@@ -191,7 +191,7 @@ class ConsoleUITest extends FunSuite {
 
     val imageCaptor = ArgCaptor[RGBImage]
     val converterCaptor = ArgCaptor[AsciiConverter]
-    val filterCaptor = ArgCaptor[Filter]
+    val filterCaptor = ArgCaptor[GreyScaleFilter]
     val exportCaptor = ArgCaptor[Exporter]
 
     consoleUI.run(arguments)
@@ -228,7 +228,7 @@ class ConsoleUITest extends FunSuite {
 
     val imageCaptor = ArgCaptor[RGBImage]
     val converterCaptor = ArgCaptor[AsciiConverter]
-    val filterCaptor = ArgCaptor[Filter]
+    val filterCaptor = ArgCaptor[GreyScaleFilter]
     val exportCaptor = ArgCaptor[Exporter]
 
     // Redirect out stream

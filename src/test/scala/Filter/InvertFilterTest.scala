@@ -39,7 +39,7 @@ class InvertFilterTest extends FunSuite{
 
   test("Filter: Invert a 2x2 Image") {
     val filter = new InvertFilter()
-    val invertedImage = filter.filterGreyScaleImage(greyScale2x2Image)
+    val invertedImage = filter.filterImage(greyScale2x2Image)
     assert(invertedImage.getHeight == 2)
     assert(invertedImage.getWidth == 2)
     for (row <- 0 until invertedImage.getHeight; col <- 0 until invertedImage.getWidth) {
@@ -49,7 +49,7 @@ class InvertFilterTest extends FunSuite{
 
   test("Filter: Invert a Zero Dimensional Image") {
     val filter = new InvertFilter()
-    val invertedImage = filter.filterGreyScaleImage(zeroDimImage)
+    val invertedImage = filter.filterImage(zeroDimImage)
     assert(invertedImage.getHeight == 0)
     assert(invertedImage.getWidth == 0)
   }
@@ -61,7 +61,7 @@ class InvertFilterTest extends FunSuite{
     when(image.getWidth).thenReturn(0)
 
     val filter = new InvertFilter()
-    val invertedImage = filter.filterGreyScaleImage(image)
+    val invertedImage = filter.filterImage(image)
     assert(invertedImage.getHeight == 2)
     assert(invertedImage.getWidth == 0)
     // Verify No Access to the Mock Image Get
@@ -75,7 +75,7 @@ class InvertFilterTest extends FunSuite{
     when(image.getWidth).thenReturn(2)
 
     val filter = new InvertFilter()
-    val invertedImage = filter.filterGreyScaleImage(image)
+    val invertedImage = filter.filterImage(image)
     assert(invertedImage.getHeight == 0)
     assert(invertedImage.getWidth == 2)
     // Verify No Access to the Mock Image Get
@@ -84,7 +84,7 @@ class InvertFilterTest extends FunSuite{
 
   test("Filter: Invert a 2x3 Image") {
     val filter = new InvertFilter()
-    val invertedImage = filter.filterGreyScaleImage(greyScale2x3Image)
+    val invertedImage = filter.filterImage(greyScale2x3Image)
     assert(invertedImage.getHeight == 2)
     assert(invertedImage.getWidth == 3)
     for (row <- 0 until invertedImage.getHeight; col <- 0 until invertedImage.getWidth) {

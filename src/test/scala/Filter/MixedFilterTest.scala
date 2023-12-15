@@ -52,8 +52,8 @@ class MixedFilterTest extends FunSuite{
     .setPixel(GreyScaleValue(253), 3, 3)
 
   test("Filter: Mixed Filter with one Filter") {
-    val filter = new MixedFilter(List[Filter] {new RotateFilter(90)})
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val filter = new MixedFilter(List[GreyScaleFilter] {new RotateFilter(90)})
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == rotatedBy90Degrees.getWidth)
     assert(rotated.getHeight == rotatedBy90Degrees.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -62,8 +62,8 @@ class MixedFilterTest extends FunSuite{
   }
 
   test("Filter: Mixed Filter with all Filters") {
-    val filter = new MixedFilter(List[Filter] (new RotateFilter(90), new InvertFilter(), new ScaleFilter(4)))
-    val filtered = filter.filterGreyScaleImage(greyScale2x2Image)
+    val filter = new MixedFilter(List[GreyScaleFilter] (new RotateFilter(90), new InvertFilter(), new ScaleFilter(4)))
+    val filtered = filter.filterImage(greyScale2x2Image)
     assert(filtered.getWidth == rotatedInvertedScaled.getWidth)
     assert(filtered.getHeight == rotatedInvertedScaled.getHeight)
     for (row <- 0 until filtered.getHeight; col <- 0 until filtered.getWidth) {
@@ -72,8 +72,8 @@ class MixedFilterTest extends FunSuite{
   }
 
   test("Filter: Mixed Filter with No Filter") {
-    val filter = new MixedFilter(List[Filter]())
-    val filtered = filter.filterGreyScaleImage(greyScaleImage)
+    val filter = new MixedFilter(List[GreyScaleFilter]())
+    val filtered = filter.filterImage(greyScaleImage)
     assert(filtered.getWidth == greyScaleImage.getWidth)
     assert(filtered.getHeight == greyScaleImage.getHeight)
     for (row <- 0 until filtered.getHeight; col <- 0 until filtered.getWidth) {
@@ -82,12 +82,12 @@ class MixedFilterTest extends FunSuite{
   }
 
   test("Filter: Mixed Filter with Invalid Arguments in One Filter") {
-    val filter = new MixedFilter(List[Filter] (new RotateFilter(95), new InvertFilter(), new ScaleFilter(4)))
-    assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
+    val filter = new MixedFilter(List[GreyScaleFilter] (new RotateFilter(95), new InvertFilter(), new ScaleFilter(4)))
+    assertThrows[IllegalArgumentException](filter.filterImage(greyScaleImage))
   }
 
   test("Filter: Mixed Filter with Invalid Arguments in More Filters") {
-    val filter = new MixedFilter(List[Filter](new RotateFilter(95), new InvertFilter(), new ScaleFilter(4.5)))
-    assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
+    val filter = new MixedFilter(List[GreyScaleFilter](new RotateFilter(95), new InvertFilter(), new ScaleFilter(4.5)))
+    assertThrows[IllegalArgumentException](filter.filterImage(greyScaleImage))
   }
 }

@@ -116,7 +116,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By 90 degrees") {
     val filter = new RotateFilter(90)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == rotatedBy90Degrees.getWidth)
     assert(rotated.getHeight == rotatedBy90Degrees.getHeight)
     for(row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -126,7 +126,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By 180 degrees") {
     val filter = new RotateFilter(180)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == rotatedBy180Degrees.getWidth)
     assert(rotated.getHeight == rotatedBy180Degrees.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -136,7 +136,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By 270 degrees") {
     val filter = new RotateFilter(270)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == rotatedBy270Degrees.getWidth)
     assert(rotated.getHeight == rotatedBy270Degrees.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -146,7 +146,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By 360 degrees") {
     val filter = new RotateFilter(360)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == greyScaleImage.getWidth)
     assert(rotated.getHeight == greyScaleImage.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -156,7 +156,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By 540 degrees") {
     val filter = new RotateFilter(540)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == rotatedBy180Degrees.getWidth)
     assert(rotated.getHeight == rotatedBy180Degrees.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -166,7 +166,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By 4050 degrees") {
     val filter = new RotateFilter(4050)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == rotatedBy90Degrees.getWidth)
     assert(rotated.getHeight == rotatedBy90Degrees.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -176,7 +176,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By -90 degrees") {
     val filter = new RotateFilter(-90)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == rotatedByMinus90Degrees.getWidth)
     assert(rotated.getHeight == rotatedByMinus90Degrees.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -186,7 +186,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By -180 degrees") {
     val filter = new RotateFilter(-180)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == rotatedByMinus180Degrees.getWidth)
     assert(rotated.getHeight == rotatedByMinus180Degrees.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -196,7 +196,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By -270 degrees") {
     val filter = new RotateFilter(-270)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == rotatedByMinus270Degrees.getWidth)
     assert(rotated.getHeight == rotatedByMinus270Degrees.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -206,7 +206,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By -360 degrees") {
     val filter = new RotateFilter(-360)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == greyScaleImage.getWidth)
     assert(rotated.getHeight == greyScaleImage.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -216,7 +216,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image By -4050 degrees") {
     val filter = new RotateFilter(-4050)
-    val rotated = filter.filterGreyScaleImage(greyScaleImage)
+    val rotated = filter.filterImage(greyScaleImage)
     assert(rotated.getWidth == rotatedByMinus90Degrees.getWidth)
     assert(rotated.getHeight == rotatedByMinus90Degrees.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -226,7 +226,7 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate Image with Different Dimensions") {
     val filter = new RotateFilter(90)
-    val rotated = filter.filterGreyScaleImage(greyScaleImageDiffDim)
+    val rotated = filter.filterImage(greyScaleImageDiffDim)
     assert(rotated.getWidth == rotatedBy90DiffDim.getWidth)
     assert(rotated.getHeight == rotatedBy90DiffDim.getHeight)
     for (row <- 0 until rotated.getHeight; col <- 0 until rotated.getWidth) {
@@ -236,8 +236,8 @@ class RotateFilterTest extends FunSuite{
 
   test("Filter: Rotate with invalid degrees") {
     val filter = new RotateFilter(574)
-    assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
-    assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImageDiffDim))
+    assertThrows[IllegalArgumentException](filter.filterImage(greyScaleImage))
+    assertThrows[IllegalArgumentException](filter.filterImage(greyScaleImageDiffDim))
   }
 
   test("Filter: Rotate a Zero Dimensional Image") {
@@ -247,7 +247,7 @@ class RotateFilterTest extends FunSuite{
     when(image.getWidth).thenReturn(0)
 
     val filter = new RotateFilter(90)
-    val rotatedImage = filter.filterGreyScaleImage(image)
+    val rotatedImage = filter.filterImage(image)
     assert(rotatedImage.getHeight == 0)
     assert(rotatedImage.getWidth == 0)
     // Verify No Access to the Mock Image Get
@@ -261,7 +261,7 @@ class RotateFilterTest extends FunSuite{
     when(image.getWidth).thenReturn(0)
 
     val filter = new RotateFilter(90)
-    val rotatedImage = filter.filterGreyScaleImage(image)
+    val rotatedImage = filter.filterImage(image)
     assert(rotatedImage.getHeight == 0)
     assert(rotatedImage.getWidth == 2)
     // Verify No Access to the Mock Image Get
@@ -275,7 +275,7 @@ class RotateFilterTest extends FunSuite{
     when(image.getWidth).thenReturn(2)
 
     val filter = new RotateFilter(90)
-    val rotatedImage = filter.filterGreyScaleImage(image)
+    val rotatedImage = filter.filterImage(image)
     assert(rotatedImage.getHeight == 2)
     assert(rotatedImage.getWidth == 0)
     // Verify No Access to the Mock Image Get

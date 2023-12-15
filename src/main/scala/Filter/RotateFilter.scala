@@ -7,10 +7,10 @@ import Image.{AsciiImage, GreyScaleImage}
  * Rotates the image by a multiple of 90 degrees
  * @param degrees - the number of degrees it has to be turned
  */
-class RotateFilter(degrees: Int) extends Filter {
+class RotateFilter(degrees: Int) extends GreyScaleFilter {
   // Normalize degrees
   private val normalizedDegrees = degrees % 360
-  override def filterGreyScaleImage(greyScaleImage: GreyScaleImage): GreyScaleImage = {
+  override def filterImage(greyScaleImage: GreyScaleImage): GreyScaleImage = {
     normalizedDegrees match {
       case -270 => rotateMinus90(rotateMinus90(rotateMinus90(greyScaleImage)))
       case -180 => rotateMinus90(rotateMinus90(greyScaleImage))

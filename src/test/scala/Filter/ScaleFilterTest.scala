@@ -36,7 +36,7 @@ class ScaleFilterTest extends FunSuite{
 
   test("Filter: Scale Image To 4 Times") {
     val filter = new ScaleFilter(4)
-    val scaledImage = filter.filterGreyScaleImage(greyScaleImage)
+    val scaledImage = filter.filterImage(greyScaleImage)
     assert(scaledImage.getHeight == 4)
     assert(scaledImage.getWidth == 4)
     for (row <- 0 until scaledImage.getHeight; col <- 0 until scaledImage.getWidth) {
@@ -46,7 +46,7 @@ class ScaleFilterTest extends FunSuite{
 
   test("Filter: Scale Image To 0.25 Times") {
     val filter = new ScaleFilter(0.25)
-    val scaledImage = filter.filterGreyScaleImage(greyScaleImage)
+    val scaledImage = filter.filterImage(greyScaleImage)
     assert(scaledImage.getHeight == 1)
     assert(scaledImage.getWidth == 1)
     for (row <- 0 until scaledImage.getHeight; col <- 0 until scaledImage.getWidth) {
@@ -56,12 +56,12 @@ class ScaleFilterTest extends FunSuite{
 
   test("Filter: Scale Image With Invalid Scale Double") {
     val filter = new ScaleFilter(0.56)
-    assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
+    assertThrows[IllegalArgumentException](filter.filterImage(greyScaleImage))
   }
 
   test("Filter: Scale Image With Invalid Scale Int") {
     val filter = new ScaleFilter(5)
-    assertThrows[IllegalArgumentException](filter.filterGreyScaleImage(greyScaleImage))
+    assertThrows[IllegalArgumentException](filter.filterImage(greyScaleImage))
   }
 
   test("Filter: Scale a Zero Dimensional Image") {
@@ -71,7 +71,7 @@ class ScaleFilterTest extends FunSuite{
     when(image.getWidth).thenReturn(0)
 
     val filter = new ScaleFilter(4)
-    val scaledImage = filter.filterGreyScaleImage(image)
+    val scaledImage = filter.filterImage(image)
     assert(scaledImage.getHeight == 0)
     assert(scaledImage.getWidth == 0)
     // Verify No Access to the Mock Image Get
@@ -85,7 +85,7 @@ class ScaleFilterTest extends FunSuite{
     when(image.getWidth).thenReturn(0)
 
     val filter = new ScaleFilter(4)
-    val scaledImage = filter.filterGreyScaleImage(image)
+    val scaledImage = filter.filterImage(image)
     assert(scaledImage.getHeight == 4)
     assert(scaledImage.getWidth == 0)
     // Verify No Access to the Mock Image Get
@@ -99,7 +99,7 @@ class ScaleFilterTest extends FunSuite{
     when(image.getWidth).thenReturn(2)
 
     val filter = new ScaleFilter(4)
-    val scaledImage = filter.filterGreyScaleImage(image)
+    val scaledImage = filter.filterImage(image)
     assert(scaledImage.getHeight == 0)
     assert(scaledImage.getWidth == 4)
     // Verify No Access to the Mock Image Get
