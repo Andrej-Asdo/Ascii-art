@@ -1,11 +1,11 @@
 package UI
 
-import Converter.{BasicConverter, Converter}
+import Converter.{AsciiConverter, Converter}
 import _root_.Converter.TransformationTable.NonLinearTable.NonLinearTable
 import _root_.Converter.TransformationTable.LinearTable.{LinearTable, PaulBurkesTable, SimpleBurkes}
 import Exporter.{ConsoleExporter, Exporter, FileExporter, MixedExporter}
 import Filter.{Filter, InvertFilter, MixedFilter, RotateFilter, ScaleFilter}
-import Image.{FileImage, GeneratedImage, Image}
+import Image.{FileImage, GeneratedImage, Image, RGBImage}
 import UI.controllers.Controller
 import _root_.Image.Pixel.RGBValue
 import Loader.{FileLoader, GeneratorLoader}
@@ -85,18 +85,19 @@ class ConsoleUI(controller: Controller) extends UI(controller) {
 
   /**
    * Gets image from the given arguments (either generated or path)
+   *
    * @param image - an argument, that of wished image
    * @return a chosen image type
    * @throws IllegalArgumentException - if invalid argument or extension is provided
    */
-  protected def getImage(image: String): Image[RGBValue] = {
+  protected def getImage(image: String): RGBImage = {
     val importRegex = "--image (.*(png|jpg|jpeg))".r
     image match {
       // Random image will be used
       case "--image-random" =>
         new GeneratorLoader(new Random).loadImage()
       // An existing image will be used
-      case importRegex(path,_) =>
+      case importRegex(path, _) =>
         new FileLoader(path).loadImage()
       case _ => throw new IllegalArgumentException("Invalid image argument or extension! Use --image-random or --image path.(png|jpg|jpeg)!")
     }
@@ -107,21 +108,21 @@ class ConsoleUI(controller: Controller) extends UI(controller) {
    * @param tableCommand - an argument for usage of a given table or converter
    * @return a converter to convert an image
    */
-  protected def getConverter(tableCommand: String): Converter = {
+  protected def getAsciiConverter(tableCommand: String): AsciiConverter = {
     val customTableRegex = "--custom-table (.*)".r
     tableCommand match {
       // Use custom table
       case customTableRegex(table) =>
-        new BasicConverter(new LinearTable(table))
+        new AsciiConverter(new LinearTable(table))
       // Use Simple Bourkes table
       case "--table SimpleBurkes" =>
-        new BasicConverter(SimpleBurkes)
+        new AsciiConverter(SimpleBurkes)
       // Use non-linear table
       case "--table Nonlinear" =>
-        new BasicConverter(NonLinearTable)
+        new AsciiConverter(NonLinearTable)
       // Use Paul Burkes tables or default to it
       case "--table PaulBurkes" | _ =>
-        new BasicConverter(PaulBurkesTable)
+        new AsciiConverter(PaulBurkesTable)
     }
   }
 
@@ -187,7 +188,7 @@ class ConsoleUI(controller: Controller) extends UI(controller) {
         controller.makeAscii(image = getImage(image), filter = getFilterFromNames(filters), output = getExportFile(exports))
       }
       else {
-        controller.makeAscii(image = getImage(image), converter = getConverter(tableType), filter = getFilterFromNames(filters), output = getExportFile(exports))
+        controller.makeAscii(image = getImage(image), converter = getAsciiConverter(tableType), filter = getFilterFromNames(filters), output = getExportFile(exports))
       }
       println("---Conversion Done---")
     }

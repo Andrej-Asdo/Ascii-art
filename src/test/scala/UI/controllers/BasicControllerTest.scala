@@ -1,6 +1,6 @@
 package UI.controllers
 
-import Converter.BasicConverter
+import Converter.AsciiConverter
 import Exporter.FileExporter
 import Filter.{InvertFilter, ScaleFilter}
 import Image.{AsciiImage, GeneratedImage, GreyScaleImage, Image}
@@ -46,7 +46,7 @@ class BasicControllerTest extends FunSuite{
 
     // Mock dependencies
     val mockImage = mock[GeneratedImage]
-    val mockConverter = mock[BasicConverter]
+    val mockConverter = mock[AsciiConverter]
     val mockFilter = mock[InvertFilter]
     val mockOutput = mock[FileExporter]
 
@@ -56,8 +56,8 @@ class BasicControllerTest extends FunSuite{
 
     basicController.makeAscii(mockImage,mockConverter,mockFilter,mockOutput)
 
-    verify(mockConverter,times(1)).convertToGreyScale(mockImage)
-    verify(mockConverter,times(1)).convertToAscii(greyScaleCaptor)
+    //verify(mockConverter,times(1)).convertToGreyScale(mockImage)
+    verify(mockConverter,times(1)).convert(greyScaleCaptor)
     verify(mockFilter,times(1)).filterGreyScaleImage(greyScaleCaptor)
     verify(mockOutput,times(1)).`export`(asciiCaptor)
   }

@@ -1,14 +1,14 @@
 package UI.controllers
 
-import Converter.{BasicConverter, Converter}
+import Converter.{AsciiConverter, Converter}
 import _root_.Converter.TransformationTable.LinearTable.PaulBurkesTable
 import Exporter.Exporter
 import Filter.Filter
-import Image.Image
+import Image.{Image, RGBImage}
 import _root_.Image.Pixel.RGBValue
 
 trait Controller {
   def showHelp(): String
 
-  def makeAscii(image: Image[RGBValue], converter: Converter = new BasicConverter(PaulBurkesTable), filter: Filter, output: Exporter): Unit
+  def makeAscii(image: RGBImage, converter: AsciiConverter = new AsciiConverter(PaulBurkesTable), filter: Filter, output: Exporter): Unit
 }

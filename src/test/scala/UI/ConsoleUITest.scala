@@ -1,9 +1,9 @@
 package UI
 
-import Converter.{BasicConverter, Converter}
+import Converter.{AsciiConverter, Converter}
 import Exporter.{Exporter, MixedExporter}
 import Filter.{Filter, MixedFilter}
-import Image.{FileImage, GeneratedImage, Image}
+import Image.{FileImage, GeneratedImage, Image, RGBImage}
 import _root_.Image.Pixel.RGBValue
 import UI.controllers.Controller
 import org.mockito.Mockito.{never, verify, verifyNoInteractions, verifyNoMoreInteractions}
@@ -21,8 +21,8 @@ class ConsoleUITest extends FunSuite {
     val consoleUI = new ConsoleUI(mockController)
     val arguments = "--image ./images/jpg/prague.jpg --output-file ./images/ascii/converted.txt".split(" ")
 
-    val imageCaptor = ArgCaptor[Image[RGBValue]]
-    val converterCaptor = ArgCaptor[Converter]
+    val imageCaptor = ArgCaptor[RGBImage]
+    val converterCaptor = ArgCaptor[AsciiConverter]
     val filterCaptor = ArgCaptor[Filter]
     val exportCaptor = ArgCaptor[Exporter]
 
@@ -40,8 +40,8 @@ class ConsoleUITest extends FunSuite {
     val consoleUI = new ConsoleUI(mockController)
     val arguments = "--image ./images/jpg/prague.jpg --rotate +90 --invert --scale 4 --output-file ./images/ascii/converted.txt".split(" ")
 
-    val imageCaptor = ArgCaptor[Image[RGBValue]]
-    val converterCaptor = ArgCaptor[Converter]
+    val imageCaptor = ArgCaptor[RGBImage]
+    val converterCaptor = ArgCaptor[AsciiConverter]
     val filterCaptor = ArgCaptor[Filter]
     val exportCaptor = ArgCaptor[Exporter]
 
@@ -59,8 +59,8 @@ class ConsoleUITest extends FunSuite {
     val consoleUI = new ConsoleUI(mockController)
     val arguments = "--image-random --output-file ./images/ascii/converted.txt".split(" ")
 
-    val imageCaptor = ArgCaptor[Image[RGBValue]]
-    val converterCaptor = ArgCaptor[Converter]
+    val imageCaptor = ArgCaptor[RGBImage]
+    val converterCaptor = ArgCaptor[AsciiConverter]
     val filterCaptor = ArgCaptor[Filter]
     val exportCaptor = ArgCaptor[Exporter]
 
@@ -129,8 +129,8 @@ class ConsoleUITest extends FunSuite {
     val consoleUI = new ConsoleUI(mockController)
     val arguments = "--image-random --table BadTable --output-file ./images/ascii/converted.txt".split(" ")
 
-    val imageCaptor = ArgCaptor[Image[RGBValue]]
-    val converterCaptor = ArgCaptor[Converter]
+    val imageCaptor = ArgCaptor[RGBImage]
+    val converterCaptor = ArgCaptor[AsciiConverter]
     val filterCaptor = ArgCaptor[Filter]
     val exportCaptor = ArgCaptor[Exporter]
 
@@ -139,7 +139,7 @@ class ConsoleUITest extends FunSuite {
     verify(mockController).makeAscii(imageCaptor, converterCaptor, filterCaptor, exportCaptor)
 
     assert(imageCaptor.value.isInstanceOf[GeneratedImage])
-    assert(converterCaptor.value.isInstanceOf[BasicConverter])
+    assert(converterCaptor.value.isInstanceOf[AsciiConverter])
     assert(filterCaptor.value.isInstanceOf[MixedFilter])
     assert(exportCaptor.value.isInstanceOf[MixedExporter])
   }
@@ -149,8 +149,8 @@ class ConsoleUITest extends FunSuite {
     val consoleUI = new ConsoleUI(mockController)
     val arguments = "--image-random --custom-table abcdefghijklmnopqrstuvwxyz --output-file ./images/ascii/converted.txt".split(" ")
 
-    val imageCaptor = ArgCaptor[Image[RGBValue]]
-    val converterCaptor = ArgCaptor[Converter]
+    val imageCaptor = ArgCaptor[RGBImage]
+    val converterCaptor = ArgCaptor[AsciiConverter]
     val filterCaptor = ArgCaptor[Filter]
     val exportCaptor = ArgCaptor[Exporter]
 
@@ -159,7 +159,7 @@ class ConsoleUITest extends FunSuite {
     verify(mockController).makeAscii(imageCaptor, converterCaptor, filterCaptor, exportCaptor)
 
     assert(imageCaptor.value.isInstanceOf[GeneratedImage])
-    assert(converterCaptor.value.isInstanceOf[BasicConverter])
+    assert(converterCaptor.value.isInstanceOf[AsciiConverter])
     assert(filterCaptor.value.isInstanceOf[MixedFilter])
     assert(exportCaptor.value.isInstanceOf[MixedExporter])
   }
@@ -169,8 +169,8 @@ class ConsoleUITest extends FunSuite {
     val consoleUI = new ConsoleUI(mockController)
     val arguments = "--image-random --table SimpleBurkes --output-file ./images/ascii/converted.txt".split(" ")
 
-    val imageCaptor = ArgCaptor[Image[RGBValue]]
-    val converterCaptor = ArgCaptor[Converter]
+    val imageCaptor = ArgCaptor[RGBImage]
+    val converterCaptor = ArgCaptor[AsciiConverter]
     val filterCaptor = ArgCaptor[Filter]
     val exportCaptor = ArgCaptor[Exporter]
 
@@ -179,7 +179,7 @@ class ConsoleUITest extends FunSuite {
     verify(mockController).makeAscii(imageCaptor, converterCaptor, filterCaptor, exportCaptor)
 
     assert(imageCaptor.value.isInstanceOf[GeneratedImage])
-    assert(converterCaptor.value.isInstanceOf[BasicConverter])
+    assert(converterCaptor.value.isInstanceOf[AsciiConverter])
     assert(filterCaptor.value.isInstanceOf[MixedFilter])
     assert(exportCaptor.value.isInstanceOf[MixedExporter])
   }
@@ -189,8 +189,8 @@ class ConsoleUITest extends FunSuite {
     val consoleUI = new ConsoleUI(mockController)
     val arguments = "--image-random --table Nonlinear --output-file ./images/ascii/converted.txt".split(" ")
 
-    val imageCaptor = ArgCaptor[Image[RGBValue]]
-    val converterCaptor = ArgCaptor[Converter]
+    val imageCaptor = ArgCaptor[RGBImage]
+    val converterCaptor = ArgCaptor[AsciiConverter]
     val filterCaptor = ArgCaptor[Filter]
     val exportCaptor = ArgCaptor[Exporter]
 
@@ -199,7 +199,7 @@ class ConsoleUITest extends FunSuite {
     verify(mockController).makeAscii(imageCaptor, converterCaptor, filterCaptor, exportCaptor)
 
     assert(imageCaptor.value.isInstanceOf[GeneratedImage])
-    assert(converterCaptor.value.isInstanceOf[BasicConverter])
+    assert(converterCaptor.value.isInstanceOf[AsciiConverter])
     assert(filterCaptor.value.isInstanceOf[MixedFilter])
     assert(exportCaptor.value.isInstanceOf[MixedExporter])
   }
@@ -226,8 +226,8 @@ class ConsoleUITest extends FunSuite {
     val consoleUI = new ConsoleUI(mockController)
     val arguments = "--help".split(" ")
 
-    val imageCaptor = ArgCaptor[Image[RGBValue]]
-    val converterCaptor = ArgCaptor[Converter]
+    val imageCaptor = ArgCaptor[RGBImage]
+    val converterCaptor = ArgCaptor[AsciiConverter]
     val filterCaptor = ArgCaptor[Filter]
     val exportCaptor = ArgCaptor[Exporter]
 
