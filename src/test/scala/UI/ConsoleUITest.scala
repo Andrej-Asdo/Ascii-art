@@ -6,6 +6,10 @@ import Filter.{GreyScaleFilter, MixedFilter}
 import Image.{FileImage, GeneratedImage, Image, RGBImage}
 import _root_.Image.Pixel.RGBValue
 import UI.controllers.Controller
+import UI.parsers.converterParsers.AsciiConverterParser
+import UI.parsers.exportParsers.ExporterFileParser
+import UI.parsers.filterParsers.FilterImplParser
+import UI.parsers.loadParsers.ImageLoaderImplParser
 import org.mockito.Mockito.{never, verify, verifyNoInteractions, verifyNoMoreInteractions}
 import org.mockito.MockitoSugar.{mock, times, when}
 import org.mockito.captor.ArgCaptor
@@ -18,7 +22,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Basic conversion without filters") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController,loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image ./images/jpg/prague.jpg --output-file ./images/ascii/converted.txt".split(" ")
 
     val imageCaptor = ArgCaptor[RGBImage]
@@ -37,7 +45,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Basic conversion with filters") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image ./images/jpg/prague.jpg --rotate +90 --invert --scale 4 --output-file ./images/ascii/converted.txt".split(" ")
 
     val imageCaptor = ArgCaptor[RGBImage]
@@ -56,7 +68,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Basic conversion with random image") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image-random --output-file ./images/ascii/converted.txt".split(" ")
 
     val imageCaptor = ArgCaptor[RGBImage]
@@ -75,7 +91,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Fail when not correct image extension") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image ./images/jpg/prague.img --output-file ./images/ascii/converted.txt".split(" ")
 
     // Redirect error out stream
@@ -92,7 +112,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Fail when not correct output argument") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image ./images/jpg/prague.jpg --output-toFile ./images/ascii/converted.txt".split(" ")
 
     // Redirect error out stream
@@ -109,7 +133,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Fail when not correct filter") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image ./images/jpg/prague.jpg --scaled 4 --output-file ./images/ascii/converted.txt".split(" ")
 
     // Redirect error out stream
@@ -126,7 +154,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Convert default when bad table name") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image-random --table BadTable --output-file ./images/ascii/converted.txt".split(" ")
 
     val imageCaptor = ArgCaptor[RGBImage]
@@ -146,7 +178,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Convert using own linear table") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image-random --custom-table abcdefghijklmnopqrstuvwxyz --output-file ./images/ascii/converted.txt".split(" ")
 
     val imageCaptor = ArgCaptor[RGBImage]
@@ -166,7 +202,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Convert using Simple Burkes") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image-random --table SimpleBurkes --output-file ./images/ascii/converted.txt".split(" ")
 
     val imageCaptor = ArgCaptor[RGBImage]
@@ -186,7 +226,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Convert using Non Linear Table") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image-random --table Nonlinear --output-file ./images/ascii/converted.txt".split(" ")
 
     val imageCaptor = ArgCaptor[RGBImage]
@@ -206,7 +250,11 @@ class ConsoleUITest extends FunSuite {
 
   test("[ConsoleUI] Export to console") {
     val mockController = mock[Controller]
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--image ./images/jpg/prague.jpg --output-console".split(" ")
 
     // Redirect out stream
@@ -223,7 +271,11 @@ class ConsoleUITest extends FunSuite {
   test("[Console UI] Show help"){
     val mockController = mock[Controller]
     when(mockController.showHelp()).thenReturn("HELP")
-    val consoleUI = new ConsoleUI(mockController)
+    val loaderParser = new ImageLoaderImplParser
+    val filterParser = new FilterImplParser
+    val exporterParser = new ExporterFileParser
+    val converterParser = new AsciiConverterParser
+    val consoleUI = new ConsoleUI(mockController, loaderParser, filterParser, exporterParser, converterParser)
     val arguments = "--help".split(" ")
 
     val imageCaptor = ArgCaptor[RGBImage]
