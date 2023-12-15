@@ -9,9 +9,10 @@ import Image.{FileImage, GeneratedImage, Image, RGBImage}
 import UI.controllers.Controller
 import _root_.Image.Pixel.RGBValue
 import Loader.{FileLoader, GeneratorLoader}
+import UI.ConsoleUI.filterParser
 import UI.parsers.converterParsers.{AsciiConverterParser, ConverterParser}
 import UI.parsers.exportParsers.ExporterParser
-import UI.parsers.filterParsers.FilterParser
+import UI.parsers.filterParsers.{FilterImplParser, FilterParser, InvertFilterParser, RotateFilterParser, ScaleFilterParser}
 import UI.parsers.loadParsers.ImageLoaderParser
 
 import java.io.File
@@ -21,7 +22,7 @@ import scala.util.Random
  * A simple console UI that takes in arguments and converts the image
  * @param controller - a controller that converts the image
  */
-class ConsoleUI(controller: Controller, loaderParser: ImageLoaderParser, filterParser: FilterParser, exporterParser: ExporterParser, converterParser: AsciiConverterParser) extends UI(controller) {
+class ConsoleUI(controller: Controller, loaderParser: ImageLoaderParser, exporterParser: ExporterParser, converterParser: AsciiConverterParser) extends UI(controller) {
 //  /**
 //   * Gets filters from arguments
 //   * @param filterNames - the names and arguments of all filters that will be used
@@ -206,4 +207,13 @@ class ConsoleUI(controller: Controller, loaderParser: ImageLoaderParser, filterP
 
 
   }
+}
+
+object ConsoleUI {
+  private val listFilterParsers = List(
+    new InvertFilterParser,
+    new RotateFilterParser,
+    new ScaleFilterParser
+  )
+  val filterParser = new FilterImplParser(listFilterParsers)
 }

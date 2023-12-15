@@ -11,9 +11,9 @@ object Main extends App {
 
   val controller = new BasicController
   val loaderParser = new ImageLoaderImplParser
-  val filterParser = new FilterImplParser
+
   val exporterParser = new ExporterFileParser
   val converterParser = new AsciiConverterParser
-  val consoleUI = new ConsoleUI(controller, loaderParser, filterParser, exporterParser, converterParser)
+  val consoleUI = new ConsoleUI(controller, loaderParser, exporterParser, converterParser)
   consoleUI.run(args)
 }
