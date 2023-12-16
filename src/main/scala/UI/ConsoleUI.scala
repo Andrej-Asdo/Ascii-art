@@ -2,15 +2,16 @@ package UI
 
 import UI.controllers.Controller
 import UI.parsers.CommandParser
-import UI.parsers.converterParsers.{AsciiConverterParser, ConverterParser}
-import UI.parsers.exportParsers.{ExporterFileParser, ExporterParser}
-import UI.parsers.filterParsers.{FilterImplParser, FilterParser, InvertFilterParser, RotateFilterParser, ScaleFilterParser}
-import UI.parsers.loadParsers.{ImageLoaderImplParser, ImageLoaderParser}
+import UI.parsers.converterParsers.AsciiConverterParser
+import UI.parsers.exportParsers.ExporterFileParser
+import UI.parsers.filterParsers.{FilterImplParser, InvertFilterParser, RotateFilterParser, ScaleFilterParser}
+import UI.parsers.loadParsers.ImageLoaderImplParser
 
 
 /**
  * A simple console UI that takes in arguments and converts the image
  * @param controller - a controller that converts the image
+ * @param parser - a parser thanks to which the console UI parses arguments
  */
 class ConsoleUI(controller: Controller, parser: CommandParser) extends UI(controller) {
   /**
@@ -90,6 +91,10 @@ class ConsoleUI(controller: Controller, parser: CommandParser) extends UI(contro
 }
 
 object ConsoleUI {
+  /**
+   * Get a common command parser for the Console UI
+   * @return a command parser
+   */
   def commonParser: CommandParser = {
     val listFilterParsers = List(
       new InvertFilterParser,

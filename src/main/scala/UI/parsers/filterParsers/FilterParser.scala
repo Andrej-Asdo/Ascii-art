@@ -1,8 +1,9 @@
 package UI.parsers.filterParsers
 
 import Filter.GreyScaleFilter
+import UI.parsers.Parser
 
-trait FilterParser {
+trait FilterParser extends Parser {
   /**
    * Gets filters from arguments
    *

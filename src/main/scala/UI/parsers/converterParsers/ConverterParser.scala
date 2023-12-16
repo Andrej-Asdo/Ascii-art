@@ -1,8 +1,9 @@
 package UI.parsers.converterParsers
 
 import Converter.Converter
+import UI.parsers.Parser
 
-trait ConverterParser[T,R] {
+trait ConverterParser[T,R] extends Parser {
   /**
    * Gets the converter that user wishes to use for converting his/hers image
    *

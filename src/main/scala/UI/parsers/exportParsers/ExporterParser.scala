@@ -1,8 +1,9 @@
 package UI.parsers.exportParsers
 
 import Exporter.Exporter
+import UI.parsers.Parser
 
-trait ExporterParser {
+trait ExporterParser extends Parser {
   /**
    * Get all types of exporters that user wishes to use.
    *

@@ -2,7 +2,7 @@ package UI.parsers.loadParsers
 
 import Image.RGBImage
 
-trait ImageLoaderParser {
+trait ImageLoaderParser{
   /**
    * Gets image from the given arguments (either generated or path)
    *
