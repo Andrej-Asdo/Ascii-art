@@ -10,10 +10,8 @@ import UI.parsers.loadParsers.ImageLoaderImplParser
 object Main extends App {
 
   val controller = new BasicController
-  val loaderParser = new ImageLoaderImplParser
+  val parser = ConsoleUI.commonParser
 
-  val exporterParser = new ExporterFileParser
-  val converterParser = new AsciiConverterParser
-  val consoleUI = new ConsoleUI(controller, loaderParser, exporterParser, converterParser)
+  val consoleUI = new ConsoleUI(controller,parser)
   consoleUI.run(args)
 }
