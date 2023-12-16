@@ -3,7 +3,7 @@ package UI
 import UI.controllers.Controller
 import UI.parsers.CommandParser
 import UI.parsers.converterParsers.AsciiConverterParser
-import UI.parsers.exportParsers.ExporterFileParser
+import UI.parsers.exportParsers.ExporterImplParser
 import UI.parsers.filterParsers.{FilterImplParser, InvertFilterParser, RotateFilterParser, ScaleFilterParser}
 import UI.parsers.loadParsers.ImageLoaderImplParser
 
@@ -73,10 +73,10 @@ class ConsoleUI(controller: Controller, parser: CommandParser) extends UI(contro
     println("---Running Conversion---")
     try {
       if (tableType == "") {
-        controller.makeAscii(image = parser.loaderParser.loadImage(image), filter = parser.filterParser.getFilterFromNames(filters), output = parser.exporterParser.getExporter(exports))
+        controller.makeAscii(image = parser.loaderParser.getLoader(image).loadImage(), filter = parser.filterParser.getFilterFromNames(filters), output = parser.exporterParser.getExporter(exports))
       }
       else {
-        controller.makeAscii(image = parser.loaderParser.loadImage(image), converter = parser.converterAsciiParser.getConverter(tableType), filter = parser.filterParser.getFilterFromNames(filters), output = parser.exporterParser.getExporter(exports))
+        controller.makeAscii(image = parser.loaderParser.getLoader(image).loadImage(), converter = parser.converterAsciiParser.getConverter(tableType), filter = parser.filterParser.getFilterFromNames(filters), output = parser.exporterParser.getExporter(exports))
       }
       println("---Conversion Done---")
     }
@@ -104,7 +104,7 @@ object ConsoleUI {
 
     val filterParser = new FilterImplParser(listFilterParsers)
     val loaderParser = new ImageLoaderImplParser
-    val exporterParser = new ExporterFileParser
+    val exporterParser = new ExporterImplParser
     val converterParser = new AsciiConverterParser
 
     new CommandParser(filterParser = filterParser, converterAsciiParser = converterParser, exporterParser = exporterParser, loaderParser = loaderParser)

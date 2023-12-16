@@ -1,6 +1,6 @@
 package UI.parsers.loadParsers
 
-import Image.RGBImage
+import Loader.Loader
 
 trait ImageLoaderParser{
   /**
@@ -10,5 +10,5 @@ trait ImageLoaderParser{
    * @return a chosen image type
    * @throws IllegalArgumentException - if invalid argument or extension is provided
    */
-  def loadImage(command: String): RGBImage
+  def getLoader(command: String): Loader
 }

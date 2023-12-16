@@ -3,7 +3,7 @@ package Main
 import UI.ConsoleUI
 import UI.controllers.BasicController
 import UI.parsers.converterParsers.AsciiConverterParser
-import UI.parsers.exportParsers.ExporterFileParser
+import UI.parsers.exportParsers.ExporterImplParser
 import UI.parsers.filterParsers.FilterImplParser
 import UI.parsers.loadParsers.ImageLoaderImplParser
 

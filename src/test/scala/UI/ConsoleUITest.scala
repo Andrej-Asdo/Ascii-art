@@ -8,7 +8,7 @@ import _root_.Image.Pixel.RGBValue
 import UI.controllers.Controller
 import UI.parsers.CommandParser
 import UI.parsers.converterParsers.AsciiConverterParser
-import UI.parsers.exportParsers.ExporterFileParser
+import UI.parsers.exportParsers.ExporterImplParser
 import UI.parsers.filterParsers.FilterImplParser
 import UI.parsers.loadParsers.ImageLoaderImplParser
 import org.mockito.Mockito.{never, verify, verifyNoInteractions, verifyNoMoreInteractions}

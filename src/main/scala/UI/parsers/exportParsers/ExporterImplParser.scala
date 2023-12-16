@@ -4,7 +4,7 @@ import Exporter.{ConsoleExporter, Exporter, FileExporter, MixedExporter}
 
 import java.io.File
 
-class ExporterFileParser extends ExporterParser {
+class ExporterImplParser extends ExporterParser {
   override def getExporter(exportArguments: Seq[String]): Exporter = {
     var exporters = List[Exporter]()
     val exportRegex = "--output-file (.*)".r
