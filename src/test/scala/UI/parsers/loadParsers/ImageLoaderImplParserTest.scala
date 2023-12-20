@@ -1,7 +1,6 @@
 package UI.parsers.loadParsers
 
-import Image.RGBImage
-import Loader.{FileLoader, GeneratorLoader}
+import Loader.{GeneratorLoader, JPEGFileLoader, JPGFileLoader, PNGFileLoader}
 import org.scalatest.FunSuite
 
 class ImageLoaderImplParserTest extends FunSuite {
@@ -12,10 +11,24 @@ class ImageLoaderImplParserTest extends FunSuite {
     assert(loader.isInstanceOf[GeneratorLoader])
   }
 
-  test("Get File Loader") {
+  test("Get File Loader JPG") {
     val command = "--image ./images/jpg/prague.jpg"
     val loaderImplParser = new ImageLoaderImplParser
     val loadedImage = loaderImplParser.getLoader(command)
-    assert(loadedImage.isInstanceOf[FileLoader])
+    assert(loadedImage.isInstanceOf[JPGFileLoader])
+  }
+
+  test("Get File Loader PNG") {
+    val command = "--image ./images/png/white.png"
+    val loaderImplParser = new ImageLoaderImplParser
+    val loadedImage = loaderImplParser.getLoader(command)
+    assert(loadedImage.isInstanceOf[PNGFileLoader])
+  }
+
+  test("Get File Loader JPEG") {
+    val command = "--image ./images/jpg/red.jpeg"
+    val loaderImplParser = new ImageLoaderImplParser
+    val loadedImage = loaderImplParser.getLoader(command)
+    assert(loadedImage.isInstanceOf[JPEGFileLoader])
   }
 }

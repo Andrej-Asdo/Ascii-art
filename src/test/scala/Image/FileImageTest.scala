@@ -1,6 +1,6 @@
 package Image
 
-import Loader.FileLoader
+import Loader.{FileLoader, JPGFileLoader}
 import org.mockito.MockitoSugar.{mock, when}
 import org.scalatest.FunSuite
 
@@ -8,7 +8,7 @@ import java.io.{File, IOException}
 import scala.util.Random
 
 class FileImageTest extends FunSuite{
-  def blackImage = new FileLoader("./images/jpg/black.jpg").loadImage()
+  def blackImage = new JPGFileLoader("./images/jpg/black.jpg").loadImage()
 
   test("[File Image] Height is non zero") {
     assert(blackImage.getHeight != 0)

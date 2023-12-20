@@ -4,7 +4,7 @@ import Converter.TransformationTable.LinearTable.PaulBurkesTable
 import Converter.TransformationTable.TransformationTable
 import Image.GreyScaleImage
 import Image.Pixel.GreyScaleValue
-import Loader.FileLoader
+import Loader.{FileLoader, JPEGFileLoader, JPGFileLoader}
 import org.mockito.ArgumentMatchersSugar.any
 import org.mockito.MockitoSugar.{mock, when}
 import org.scalatest.FunSuite
@@ -31,7 +31,7 @@ class AsciiConverterTest extends FunSuite{
   test("Black image has all same chars using Paul Burkes Table") {
     val asciiConverter = new AsciiConverter(PaulBurkesTable)
     val greyScaleConverter = new GreyScaleConverter()
-    val blackImage = new FileLoader("./images/jpg/black.jpg").loadImage()
+    val blackImage = new JPGFileLoader("./images/jpg/black.jpg").loadImage()
     val greyScale = greyScaleConverter.convert(blackImage)
     val converted = asciiConverter.convert(greyScale)
     for (row <- 0 until converted.getHeight; col <- 0 until converted.getWidth) {
