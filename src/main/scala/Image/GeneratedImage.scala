@@ -13,5 +13,9 @@ class GeneratedImage(private val height: Int, private val width: Int, private va
 
   override def getWidth: Int = width
 
-  override def getPixel(row: Int, col: Int): RGBValue = pixels(row)(col)
+  override def getPixel(row: Int, col: Int): RGBValue = {
+    if (row > height || col > width)
+      throw new IndexOutOfBoundsException("Out of bounds! The height or width of the picture is smaller than requested!")
+    pixels(row)(col)
+  }
 }
