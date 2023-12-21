@@ -4,7 +4,7 @@ import Filter.{GreyScaleFilter, RotateFilter}
 class RotateFilterParser extends SimpleFilterParser {
   private val rotateRegex = "--rotate ([+,-]*[0-9]+)".r
   override def getFilterFromName(filterName: String): Option[GreyScaleFilter] = {
-    // Make regex
+    // Match regex
     filterName match {
       case rotateRegex(value) =>
         Option(new RotateFilter(value.toInt))

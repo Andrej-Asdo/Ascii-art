@@ -1,8 +1,7 @@
 package Converter
 
-import Converter.TransformationTable.TransformationTable
 import Image.Pixel.{GreyScaleValue, RGBValue}
-import Image.{Image, RGBImage}
+import Image.RGBImage
 import org.mockito.ArgumentMatchersSugar.any
 import org.mockito.MockitoSugar.{mock, when}
 import org.scalatest.FunSuite

@@ -1,8 +1,5 @@
 package Converter
 
-import Image.{AsciiImage, GreyScaleImage, Image}
-import _root_.Image.Pixel.RGBValue
-
 /**
  * A general converter used to convert images in between various formats
  */

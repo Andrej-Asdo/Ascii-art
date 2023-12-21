@@ -3,7 +3,7 @@ package Filter
 import Image.GreyScaleImage
 import Image.Pixel.GreyScaleValue
 import org.mockito.ArgumentMatchersSugar.any
-import org.mockito.MockitoSugar.{mock, times, verify, verifyZeroInteractions, when}
+import org.mockito.MockitoSugar.{mock, times, verify, when}
 import org.scalatest.FunSuite
 
 class ScaleFilterTest extends FunSuite{

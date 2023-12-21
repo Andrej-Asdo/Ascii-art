@@ -1,6 +1,6 @@
 package Filter
 
-import Image.{AsciiImage, GreyScaleImage}
+import Image.GreyScaleImage
 
 /**
  * A set of more filters that can be applied one by one on the image

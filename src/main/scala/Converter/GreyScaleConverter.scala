@@ -1,6 +1,6 @@
 package Converter
 
-import Image.{GreyScaleImage, Image, RGBImage}
+import Image.{GreyScaleImage, RGBImage}
 import _root_.Image.Pixel.{GreyScaleValue, RGBValue}
 
 /**

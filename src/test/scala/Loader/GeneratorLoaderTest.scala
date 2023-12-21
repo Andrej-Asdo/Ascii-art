@@ -2,7 +2,6 @@ package Loader
 
 import org.scalatest.FunSuite
 import Image.Pixel.RGBValue
-import Loader.GeneratorLoader
 import org.mockito.MockitoSugar.{mock, when}
 import org.scalatest.Matchers.{a, be, convertToAnyShouldWrapper}
 

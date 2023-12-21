@@ -1,12 +1,7 @@
 package Image
 
 import Image.Pixel.RGBValue
-import Loader.GeneratorLoader
-import org.mockito.MockitoSugar.{mock, when}
 import org.scalatest.FunSuite
-import org.scalatest.Matchers.{a, be, convertToAnyShouldWrapper}
-
-import scala.util.Random
 
 class GeneratedImageTest extends FunSuite{
 

@@ -1,7 +1,6 @@
 package UI.parsers.filterParsers
 
 import Filter.RotateFilter
-import net.bytebuddy.dynamic.scaffold.TypeInitializer.None
 import org.scalatest.FunSuite
 
 class RotateFilterParserTest extends FunSuite{

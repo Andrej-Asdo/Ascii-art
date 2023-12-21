@@ -2,9 +2,8 @@ package UI.controllers
 
 import Converter.AsciiConverter
 import Exporter.FileExporter
-import Filter.{InvertFilter, ScaleFilter}
-import Image.{AsciiImage, GeneratedImage, GreyScaleImage, Image}
-import org.mockito.Mockito
+import Filter.InvertFilter
+import Image.{AsciiImage, GeneratedImage, GreyScaleImage}
 import org.mockito.Mockito.verify
 import org.mockito.MockitoSugar.{mock, times}
 import org.mockito.captor.ArgCaptor

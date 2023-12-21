@@ -1,5 +1,5 @@
 package UI.parsers.filterParsers
-import Filter.{Filter, GreyScaleFilter, InvertFilter, MixedFilter, RotateFilter, ScaleFilter}
+import Filter.{GreyScaleFilter,MixedFilter}
 
 class FilterImplParser(filterRepository: Seq[SimpleFilterParser]) extends FilterParser {
   override def getFilterFromNames(filterNames: Seq[String]): GreyScaleFilter = {

@@ -1,7 +1,6 @@
 package UI.parsers.filterParsers
 
 import Filter.ScaleFilter
-import net.bytebuddy.dynamic.scaffold.TypeInitializer.None
 import org.scalatest.FunSuite
 
 class ScaleFilterParserTest extends FunSuite {

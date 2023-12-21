@@ -1,7 +1,6 @@
 package UI.parsers.filterParsers
 
 import Filter.MixedFilter
-import UI.ConsoleUI
 import org.scalatest.FunSuite
 
 class FilterImplParserTest extends FunSuite {

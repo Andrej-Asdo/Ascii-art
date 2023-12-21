@@ -1,6 +1,5 @@
 package UI.parsers.loadParsers
-import Image.RGBImage
-import Loader.{FileLoader, GeneratorLoader, JPEGFileLoader, JPGFileLoader, Loader, PNGFileLoader}
+import Loader.{GeneratorLoader, JPEGFileLoader, JPGFileLoader, Loader, PNGFileLoader}
 
 import scala.util.Random
 

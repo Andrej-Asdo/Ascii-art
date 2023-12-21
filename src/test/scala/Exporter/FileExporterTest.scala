@@ -5,7 +5,7 @@ import Image.Pixel.AsciiValue
 import org.mockito.MockitoSugar.{mock, when}
 import org.scalatest.FunSuite
 
-import java.io.{File, FileInputStream, IOException}
+import java.io.{File, IOException}
 import scala.io.Source
 
 class FileExporterTest extends FunSuite {

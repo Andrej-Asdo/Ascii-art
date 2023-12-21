@@ -1,6 +1,6 @@
 package Filter
 
-import Image.{AsciiImage, GreyScaleImage}
+import Image.GreyScaleImage
 
 /**
  * A Filter that scales the image 0.25, 1 or 4 times

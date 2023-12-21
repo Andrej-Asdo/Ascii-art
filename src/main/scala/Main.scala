@@ -2,16 +2,15 @@ package Main
 
 import UI.ConsoleUI
 import UI.controllers.BasicController
-import UI.parsers.converterParsers.AsciiConverterParser
-import UI.parsers.exportParsers.ExporterImplParser
-import UI.parsers.filterParsers.FilterImplParser
-import UI.parsers.loadParsers.ImageLoaderImplParser
 
 object Main extends App {
-
+  // Get the wished controller and parser
   val controller = new BasicController
   val parser = ConsoleUI.commonParser
 
+  // Get the UI
   val consoleUI = new ConsoleUI(controller,parser)
+
+  // Run the app
   consoleUI.run(args)
 }

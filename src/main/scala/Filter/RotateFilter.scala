@@ -1,7 +1,6 @@
 package Filter
 
-import Image.Pixel.GreyScaleValue
-import Image.{AsciiImage, GreyScaleImage}
+import Image.GreyScaleImage
 
 /**
  * Rotates the image by a multiple of 90 degrees

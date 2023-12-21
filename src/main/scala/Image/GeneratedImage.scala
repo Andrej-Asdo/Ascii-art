@@ -1,8 +1,6 @@
 package Image
 import Image.Pixel.RGBValue
 
-import scala.util.Random
-
 /**
  * A generated image, the image will have random height, width and all its pixels
  * It's a type of RGB Image

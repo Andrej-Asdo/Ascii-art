@@ -1,7 +1,7 @@
 package Filter
 
 import Image.Pixel.GreyScaleValue
-import Image.{AsciiImage, GreyScaleImage}
+import Image.GreyScaleImage
 
 /**
  * A Filter that inverts the values of greyscale pixels of the image

@@ -1,5 +1,5 @@
 package UI.parsers.converterParsers
-import Converter.{AsciiConverter, Converter}
+import Converter.AsciiConverter
 import _root_.Converter.TransformationTable.LinearTable.{LinearTable, PaulBurkesTable, SimpleBurkes}
 import _root_.Converter.TransformationTable.NonLinearTable.NonLinearTable
 import Image.{AsciiImage, GreyScaleImage}

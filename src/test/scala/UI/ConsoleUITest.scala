@@ -1,17 +1,11 @@
 package UI
 
-import Converter.{AsciiConverter, Converter}
+import Converter.AsciiConverter
 import Exporter.{Exporter, MixedExporter}
 import Filter.{GreyScaleFilter, MixedFilter}
-import Image.{FileImage, GeneratedImage, Image, RGBImage}
-import _root_.Image.Pixel.RGBValue
+import Image.{FileImage, GeneratedImage, RGBImage}
 import UI.controllers.Controller
-import UI.parsers.CommandParser
-import UI.parsers.converterParsers.AsciiConverterParser
-import UI.parsers.exportParsers.ExporterImplParser
-import UI.parsers.filterParsers.FilterImplParser
-import UI.parsers.loadParsers.ImageLoaderImplParser
-import org.mockito.Mockito.{never, verify, verifyNoInteractions, verifyNoMoreInteractions}
+import org.mockito.Mockito.{never, verify}
 import org.mockito.MockitoSugar.{mock, times, when}
 import org.mockito.captor.ArgCaptor
 import org.scalatest.FunSuite

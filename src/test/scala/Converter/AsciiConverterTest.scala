@@ -4,7 +4,7 @@ import Converter.TransformationTable.LinearTable.PaulBurkesTable
 import Converter.TransformationTable.TransformationTable
 import Image.GreyScaleImage
 import Image.Pixel.GreyScaleValue
-import Loader.{FileLoader, JPEGFileLoader, JPGFileLoader}
+import Loader.JPGFileLoader
 import org.mockito.ArgumentMatchersSugar.any
 import org.mockito.MockitoSugar.{mock, when}
 import org.scalatest.FunSuite

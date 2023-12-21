@@ -1,11 +1,13 @@
 package UI.controllers
 
-import Converter.{AsciiConverter, Converter, GreyScaleConverter}
+import Converter.{AsciiConverter, GreyScaleConverter}
 import Exporter.Exporter
 import Filter.GreyScaleFilter
-import Image.{Image, RGBImage}
-import _root_.Image.Pixel.RGBValue
+import Image.RGBImage
 
+/**
+ * A basic controller mainly usable for a console UI
+ */
 class BasicController extends Controller {
   override def showHelp(): String = {
     "---Help---\n" +

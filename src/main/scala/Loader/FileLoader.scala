@@ -7,14 +7,11 @@ import javax.imageio.ImageIO
 import scala.util.matching.Regex
 
 /**
- * Loader of images from file
+ * A generic loader of images from file
  * @param path - a path where the file is located
  * @param importRegex - a regex according to which an importing follows
  */
 abstract class FileLoader(path: String, importRegex: Regex) extends Loader {
-  // Regex of supported formats
-  //private val importRegex = "(.*(png|jpg|jpeg))".r
-
   // Check for a supported format
   if (path match {
     case importRegex(_,_) => true

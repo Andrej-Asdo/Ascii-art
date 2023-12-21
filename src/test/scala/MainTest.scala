@@ -1,6 +1,3 @@
-import UI.ConsoleUI
-import UI.controllers.{BasicController, Controller}
-import org.mockito.MockitoSugar.{mock, verify}
 import org.scalatest.FunSuite
 
 import java.io.{ByteArrayOutputStream, PrintStream}

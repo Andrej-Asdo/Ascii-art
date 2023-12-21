@@ -1,10 +1,7 @@
 package Image
 
-import Loader.{FileLoader, JPGFileLoader}
-import org.mockito.MockitoSugar.{mock, when}
+import Loader.JPGFileLoader
 import org.scalatest.FunSuite
-
-import java.io.{File, IOException}
 import scala.util.Random
 
 class FileImageTest extends FunSuite{

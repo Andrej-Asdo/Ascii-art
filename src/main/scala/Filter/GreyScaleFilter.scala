@@ -1,9 +1,9 @@
 package Filter
 
-import Image.{AsciiImage, GreyScaleImage}
+import Image.GreyScaleImage
 
 /**
- * A generic filter
+ * A generic filter of greyscale images
  */
 trait GreyScaleFilter extends Filter[GreyScaleImage]{
   /**

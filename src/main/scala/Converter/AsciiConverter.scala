@@ -1,8 +1,8 @@
 package Converter
 
 import Converter.TransformationTable.TransformationTable
-import Image.Pixel.{AsciiValue, RGBValue}
-import Image.{AsciiImage, GreyScaleImage, Image}
+import Image.Pixel.AsciiValue
+import Image.{AsciiImage, GreyScaleImage}
 
 /**
  * Converts GreyScale Image to Ascii Image

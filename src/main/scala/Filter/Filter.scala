@@ -5,7 +5,7 @@ package Filter
  */
 trait Filter[T] {
   /**
-   * Filter the greyscale image and return the filtered one
+   * Filter an image and return the filtered one
    *
    * @param image the image to be filtered
    * @return the filtered image
